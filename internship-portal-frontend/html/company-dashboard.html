@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Company Dashboard | SmartIntern</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Dashboard CSS -->
+    <!--<link rel="stylesheet" href="../css/student-dashboard.css"> -->
+
+    <!-- Company Dashboard CSS -->
+    <link rel="stylesheet" href="../css/company-dashboard.css">
+</head>
+
+<body class="company-dashboard-page">
+
+    <!-- =========================================
+         MOBILE OVERLAY
+    ========================================== -->
+
+    <div class="company-sidebar-overlay" id="companySidebarOverlay"></div>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="company-sidebar" id="companySidebar">
+
+        <!-- Brand -->
+
+        <div class="company-brand">
+
+            <div class="company-brand-icon">
+                ✦
+            </div>
+
+            <div>
+                <h2>SmartIntern</h2>
+                <span>Company Portal</span>
+            </div>
+
+        </div>
+
+
+        <!-- Company Profile -->
+
+        <div class="company-mini-profile">
+
+            <div class="company-avatar">
+                TC
+            </div>
+
+            <div class="company-profile-info">
+                <strong id="sidebarCompanyName">
+                    TechCorp
+                </strong>
+
+                <span>Company Account</span>
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="company-navigation">
+
+            <p class="company-nav-title">
+                MAIN MENU
+            </p>
+
+
+            <a href="company-dashboard.html"
+               class="company-nav-link active">
+
+                <span class="company-nav-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="company-profile.html"
+               class="company-nav-link">
+
+                <span class="company-nav-icon">◎</span>
+
+                <span>Company Profile</span>
+
+            </a>
+
+
+            <a href="post-internship.html"
+               class="company-nav-link">
+
+                <span class="company-nav-icon">＋</span>
+
+                <span>Post Internship</span>
+
+            </a>
+
+
+            <a href="manage-internships.html"
+               class="company-nav-link">
+
+                <span class="company-nav-icon">▤</span>
+
+                <span>Manage Internships</span>
+
+            </a>
+
+
+            <a href="view-applicants.html"
+               class="company-nav-link">
+
+                <span class="company-nav-icon">♧</span>
+
+                <span>Applicants</span>
+
+            </a>
+
+
+            <a href="applicant-detail.html"
+               class="company-nav-link">
+
+                <span class="company-nav-icon">◉</span>
+
+                <span>Applicant Details</span>
+
+            </a>
+
+
+            <p class="company-nav-title second">
+                ACCOUNT
+            </p>
+
+
+            <a href="#" class="company-nav-link">
+
+                <span class="company-nav-icon">♢</span>
+
+                <span>Notifications</span>
+
+                <span class="company-notification-count">
+                    5
+                </span>
+
+            </a>
+
+
+            <a href="#" class="company-nav-link">
+
+                <span class="company-nav-icon">⚙</span>
+
+                <span>Settings</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- Help Card -->
+
+        <div class="company-help-card">
+
+            <div class="company-help-icon">
+                ✦
+            </div>
+
+            <strong>
+                Need Help?
+            </strong>
+
+            <p>
+                Manage your internships and applicants easily.
+            </p>
+
+            <button type="button">
+                Get Support
+            </button>
+
+        </div>
+
+
+        <!-- Logout -->
+
+        <button class="company-logout-btn" id="companyLogoutBtn">
+
+            <span>↪</span>
+
+            Logout
+
+        </button>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="company-main">
+
+
+        <!-- =====================================
+             TOPBAR
+        ====================================== -->
+
+        <header class="company-topbar">
+
+            <div class="company-topbar-left">
+
+                <button
+                    class="company-mobile-menu"
+                    id="companyMobileMenu">
+
+                    ☰
+
+                </button>
+
+                <div>
+
+                    <span class="company-page-label">
+                        COMPANY PORTAL
+                    </span>
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="company-topbar-right">
+
+                <!-- Notification -->
+
+                <button
+                    class="company-notification-btn"
+                    id="companyNotificationBtn">
+
+                    ♢
+
+                    <span></span>
+
+                </button>
+
+
+                <!-- Profile -->
+
+                <div class="company-top-profile">
+
+                    <div class="company-top-avatar">
+                        TC
+                    </div>
+
+                    <div>
+
+                        <strong id="topCompanyName">
+                            TechCorp
+                        </strong>
+
+                        <small>
+                            Company
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================
+             WELCOME HERO
+        ====================================== -->
+
+        <section class="company-welcome-hero">
+
+
+            <div class="company-welcome-content">
+
+                <span class="company-eyebrow">
+                    BUILD YOUR TEAM
+                </span>
+
+                <h2>
+                    Find the right talent
+                    <span>for your company.</span>
+                </h2>
+
+                <p>
+                    Post internships, discover talented students,
+                    and use AI-powered matching to find candidates
+                    who fit your requirements.
+                </p>
+
+
+                <div class="company-hero-actions">
+
+                    <a
+                        href="post-internship.html"
+                        class="company-primary-btn">
+
+                        <span>＋</span>
+
+                        Post Internship
+
+                    </a>
+
+
+                    <a
+                        href="view-applicants.html"
+                        class="company-secondary-btn">
+
+                        View Applicants
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 3D VISUAL
+            ================================== -->
+
+            <div class="company-hero-visual">
+
+                <div class="company-orbit company-orbit-one"></div>
+
+                <div class="company-orbit company-orbit-two"></div>
+
+                <canvas id="companyDashboard3D"></canvas>
+
+
+                <!-- AI Match Card -->
+
+                <div class="company-floating-card">
+
+                    <div class="company-floating-icon">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <small>
+                            AI CANDIDATE MATCH
+                        </small>
+
+                        <strong>
+                            96%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Candidate Card -->
+
+                <div class="company-candidate-floating">
+
+                    <div class="company-candidate-avatar">
+                        AS
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            New Candidate
+                        </strong>
+
+                        <span>
+                            94% match
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
+
+        <section class="company-stats-grid">
+
+
+            <div class="company-stat-card">
+
+                <div class="company-stat-icon purple">
+                    ▤
+                </div>
+
+                <div class="company-stat-content">
+
+                    <span>
+                        Active Internships
+                    </span>
+
+                    <strong>
+                        08
+                    </strong>
+
+                    <small class="positive">
+                        ↑ 12% this month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="company-stat-card">
+
+                <div class="company-stat-icon pink">
+                    ♧
+                </div>
+
+                <div class="company-stat-content">
+
+                    <span>
+                        Total Applicants
+                    </span>
+
+                    <strong>
+                        124
+                    </strong>
+
+                    <small class="positive">
+                        ↑ 18% this month
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="company-stat-card">
+
+                <div class="company-stat-icon lavender">
+                    ✦
+                </div>
+
+                <div class="company-stat-content">
+
+                    <span>
+                        AI Matches
+                    </span>
+
+                    <strong>
+                        42
+                    </strong>
+
+                    <small>
+                        Strong matches
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="company-stat-card">
+
+                <div class="company-stat-icon rose">
+                    ◉
+                </div>
+
+                <div class="company-stat-content">
+
+                    <span>
+                        Interviews
+                    </span>
+
+                    <strong>
+                        16
+                    </strong>
+
+                    <small>
+                        This month
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             MAIN GRID
+        ====================================== -->
+
+        <section class="company-dashboard-grid">
+
+
+            <!-- =================================
+                 ACTIVE INTERNSHIPS
+            ================================== -->
+
+            <div class="company-dashboard-card internships-management-card">
+
+                <div class="company-card-header">
+
+                    <div>
+
+                        <span>
+                            YOUR INTERNSHIPS
+                        </span>
+
+                        <h3>
+                            Active Internships
+                        </h3>
+
+                    </div>
+
+                    <a href="manage-internships.html">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <div class="company-internship-list">
+
+
+                    <!-- Internship 1 -->
+
+                    <div class="company-internship-item">
+
+                        <div class="company-internship-icon">
+                            AI
+                        </div>
+
+                        <div class="company-internship-info">
+
+                            <strong>
+                                AI Engineering Intern
+                            </strong>
+
+                            <span>
+                                Remote · 3 Months
+                            </span>
+
+                        </div>
+
+                        <div class="company-internship-applicants">
+
+                            <strong>
+                                28
+                            </strong>
+
+                            <span>
+                                Applicants
+                            </span>
+
+                        </div>
+
+                        <span class="company-status active">
+                            Active
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Internship 2 -->
+
+                    <div class="company-internship-item">
+
+                        <div class="company-internship-icon pink">
+                            WD
+                        </div>
+
+                        <div class="company-internship-info">
+
+                            <strong>
+                                Frontend Developer
+                            </strong>
+
+                            <span>
+                                Hybrid · 6 Months
+                            </span>
+
+                        </div>
+
+                        <div class="company-internship-applicants">
+
+                            <strong>
+                                41
+                            </strong>
+
+                            <span>
+                                Applicants
+                            </span>
+
+                        </div>
+
+                        <span class="company-status active">
+                            Active
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Internship 3 -->
+
+                    <div class="company-internship-item">
+
+                        <div class="company-internship-icon lavender">
+                            UX
+                        </div>
+
+                        <div class="company-internship-info">
+
+                            <strong>
+                                UI/UX Design Intern
+                            </strong>
+
+                            <span>
+                                Remote · 3 Months
+                            </span>
+
+                        </div>
+
+                        <div class="company-internship-applicants">
+
+                            <strong>
+                                19
+                            </strong>
+
+                            <span>
+                                Applicants
+                            </span>
+
+                        </div>
+
+                        <span class="company-status active">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 AI MATCHING
+            ================================== -->
+
+            <div class="company-dashboard-card company-ai-card">
+
+                <div class="company-card-header">
+
+                    <div>
+
+                        <span>
+                            ARTIFICIAL INTELLIGENCE
+                        </span>
+
+                        <h3>
+                            AI Candidate Matching
+                        </h3>
+
+                    </div>
+
+                    <div class="company-ai-star">
+                        ✦
+                    </div>
+
+                </div>
+
+
+                <div class="company-ai-content">
+
+                    <div class="company-match-circle">
+
+                        <div>
+
+                            <strong>
+                                96%
+                            </strong>
+
+                            <span>
+                                Match
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <p>
+                        Our AI has identified candidates
+                        whose skills closely match your
+                        internship requirements.
+                    </p>
+
+
+                    <a
+                        href="view-applicants.html"
+                        class="company-ai-button">
+
+                        View AI Matches
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 RECENT APPLICANTS
+            ================================== -->
+
+            <div class="company-dashboard-card recent-applicants-card">
+
+                <div class="company-card-header">
+
+                    <div>
+
+                        <span>
+                            RECENT ACTIVITY
+                        </span>
+
+                        <h3>
+                            Recent Applicants
+                        </h3>
+
+                    </div>
+
+                    <a href="view-applicants.html">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <div class="company-applicant-list">
+
+
+                    <div class="company-applicant-item">
+
+                        <div class="company-applicant-avatar">
+                            AR
+                        </div>
+
+                        <div class="company-applicant-info">
+
+                            <strong>
+                                Ayesha Rahman
+                            </strong>
+
+                            <span>
+                                AI Engineering Intern
+                            </span>
+
+                        </div>
+
+                        <div class="company-match-badge">
+                            96%
+                        </div>
+
+                        <a href="applicant-detail.html">
+                            →
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="company-applicant-item">
+
+                        <div class="company-applicant-avatar pink">
+                            MS
+                        </div>
+
+                        <div class="company-applicant-info">
+
+                            <strong>
+                                Muhammad Saad
+                            </strong>
+
+                            <span>
+                                Frontend Developer
+                            </span>
+
+                        </div>
+
+                        <div class="company-match-badge">
+                            91%
+                        </div>
+
+                        <a href="applicant-detail.html">
+                            →
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="company-applicant-item">
+
+                        <div class="company-applicant-avatar lavender">
+                            ZK
+                        </div>
+
+                        <div class="company-applicant-info">
+
+                            <strong>
+                                Zara Khan
+                            </strong>
+
+                            <span>
+                                UI/UX Design Intern
+                            </span>
+
+                        </div>
+
+                        <div class="company-match-badge">
+                            88%
+                        </div>
+
+                        <a href="applicant-detail.html">
+                            →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 UPCOMING INTERVIEWS
+            ================================== -->
+
+            <div class="company-dashboard-card company-interview-card">
+
+                <div class="company-card-header">
+
+                    <div>
+
+                        <span>
+                            SCHEDULE
+                        </span>
+
+                        <h3>
+                            Upcoming Interviews
+                        </h3>
+
+                    </div>
+
+                    <span class="company-calendar-icon">
+                        ◫
+                    </span>
+
+                </div>
+
+
+                <div class="company-interview-item">
+
+                    <div class="company-date-box">
+
+                        <strong>
+                            24
+                        </strong>
+
+                        <span>
+                            SEP
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Ayesha Rahman
+                        </strong>
+
+                        <span>
+                            AI Engineering Interview
+                        </span>
+
+                        <small>
+                            10:30 AM · Online
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="company-interview-item">
+
+                    <div class="company-date-box pink">
+
+                        <strong>
+                            26
+                        </strong>
+
+                        <span>
+                            SEP
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Muhammad Saad
+                        </strong>
+
+                        <span>
+                            Frontend Developer
+                        </span>
+
+                        <small>
+                            02:00 PM · Online
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="view-applicants.html"
+                    class="company-view-schedule">
+
+                    View Schedule →
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             BOTTOM SECTION
+        ====================================== -->
+
+        <section class="company-bottom-grid">
+
+
+            <!-- Profile Completion -->
+
+            <div class="company-dashboard-card company-profile-progress">
+
+                <div class="company-card-header">
+
+                    <div>
+
+                        <span>
+                            COMPANY PROFILE
+                        </span>
+
+                        <h3>
+                            Profile Completion
+                        </h3>
+
+                    </div>
+
+                    <strong>
+                        82%
+                    </strong>
+
+                </div>
+
+
+                <div class="company-progress-bar">
+
+                    <div
+                        class="company-progress-fill"
+                        style="width: 82%;">
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Complete your company profile to
+                    attract more qualified candidates.
+                </p>
+
+
+                <a href="company-profile.html">
+                    Complete Profile →
+                </a>
+
+            </div>
+
+
+
+            <!-- Notifications -->
+
+            <div class="company-dashboard-card company-notifications-card">
+
+                <div class="company-card-header">
+
+                    <div>
+
+                        <span>
+                            UPDATES
+                        </span>
+
+                        <h3>
+                            Notifications
+                        </h3>
+
+                    </div>
+
+                    <span class="company-unread-count">
+                        5 New
+                    </span>
+
+                </div>
+
+
+                <div class="company-notification-item">
+
+                    <div>
+                        ✦
+                    </div>
+
+                    <p>
+                        3 new candidates matched your
+                        AI Engineering internship.
+                    </p>
+
+                    <small>
+                        10m
+                    </small>
+
+                </div>
+
+
+                <div class="company-notification-item">
+
+                    <div>
+                        ◉
+                    </div>
+
+                    <p>
+                        Ayesha Rahman accepted your
+                        interview invitation.
+                    </p>
+
+                    <small>
+                        1h
+                    </small>
+
+                </div>
+
+
+                <div class="company-notification-item">
+
+                    <div>
+                        ♧
+                    </div>
+
+                    <p>
+                        5 new applications received today.
+                    </p>
+
+                    <small>
+                        3h
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer class="company-dashboard-footer">
+
+            <span>
+                © 2026 SmartIntern
+            </span>
+
+            <span>
+                AI-Powered Internship Platform
+            </span>
+
+        </footer>
+
+    </main>
+
+
+
+    <!-- =========================================
+         THREE.JS
+    ========================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+
+    <!-- Company Dashboard JS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../js/company-dashboard.js"></script>
+
+</body>
+
+</html>
