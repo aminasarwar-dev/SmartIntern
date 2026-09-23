@@ -3,7 +3,9 @@
 ========================================================= */
 
 .profile-page {
+
     min-height: 100vh;
+
     margin: 0;
 
     background: #fffdfb;
@@ -21,9 +23,11 @@
 ========================================================= */
 
 .corner-glow {
+
     position: fixed;
 
     width: 600px;
+
     height: 600px;
 
     border-radius: 50%;
@@ -33,8 +37,11 @@
     z-index: 0;
 }
 
+
 .corner-glow-left {
+
     top: -310px;
+
     left: -300px;
 
     background:
@@ -46,8 +53,11 @@
         );
 }
 
+
 .corner-glow-right {
+
     right: -310px;
+
     bottom: -320px;
 
     background:
@@ -65,6 +75,7 @@
 ========================================================= */
 
 .profile-wrapper {
+
     position: relative;
 
     z-index: 2;
@@ -90,6 +101,7 @@
 ========================================================= */
 
 .profile-card {
+
     width: 100%;
 
     max-width: 675px;
@@ -121,13 +133,19 @@
 @keyframes profileReveal {
 
     from {
+
         opacity: 0;
+
         transform: translateY(-40px);
+
     }
 
     to {
+
         opacity: 1;
+
         transform: translateY(0);
+
     }
 
 }
@@ -138,12 +156,15 @@
 ========================================================= */
 
 .profile-heading {
+
     text-align: center;
 
     margin-bottom: 30px;
 }
 
+
 .profile-heading h1 {
+
     margin: 0;
 
     font-family:
@@ -159,13 +180,17 @@
     color: #29232b;
 }
 
+
 .profile-heading h1 em {
+
     color: #9a6bb3;
 
     font-weight: 500;
 }
 
+
 .profile-heading p {
+
     margin: 13px 0 0;
 
     color: #8c7f8d;
@@ -179,6 +204,7 @@
 ========================================================= */
 
 .profile-role {
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -196,7 +222,9 @@
     border-radius: 17px;
 }
 
+
 .profile-role-btn {
+
     border: none;
 
     background: transparent;
@@ -220,13 +248,17 @@
         color 0.25s ease;
 }
 
+
 .profile-role-btn:hover {
+
     background: transparent;
 
     color: #29232b;
 }
 
+
 .profile-role-btn.active {
+
     background: #ffffff;
 
     color: #302932;
@@ -241,6 +273,7 @@
 ========================================================= */
 
 .profile-fields {
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -251,11 +284,15 @@
         fieldsReveal 0.4s ease;
 }
 
+
 .profile-fields.hidden {
+
     display: none;
 }
 
+
 .full-width {
+
     grid-column: 1 / -1;
 }
 
@@ -263,13 +300,19 @@
 @keyframes fieldsReveal {
 
     from {
+
         opacity: 0;
+
         transform: translateY(12px);
+
     }
 
     to {
+
         opacity: 1;
+
         transform: translateY(0);
+
     }
 
 }
@@ -280,6 +323,7 @@
 ========================================================= */
 
 .profile-input {
+
     display: flex;
 
     flex-direction: column;
@@ -287,7 +331,9 @@
     min-width: 0;
 }
 
+
 .profile-input label {
+
     margin-bottom: 8px;
 
     font-size: 12px;
@@ -297,7 +343,9 @@
     color: #655a68;
 }
 
+
 .profile-input label span {
+
     color: #a398a5;
 
     font-weight: 500;
@@ -311,6 +359,7 @@
 .profile-input input,
 .profile-input select,
 .profile-input textarea {
+
     width: 100%;
 
     box-sizing: border-box;
@@ -336,8 +385,10 @@
         box-shadow 0.25s ease;
 }
 
+
 .profile-input input::placeholder,
 .profile-input textarea::placeholder {
+
     color: #b4aab6;
 }
 
@@ -347,6 +398,7 @@
 .profile-input input:hover,
 .profile-input select:hover,
 .profile-input textarea:hover {
+
     border-color: #d7c3dd;
 }
 
@@ -356,6 +408,7 @@
 .profile-input input:focus,
 .profile-input select:focus,
 .profile-input textarea:focus {
+
     outline: none;
 
     border-color: #b38bd7;
@@ -370,12 +423,15 @@
 ========================================================= */
 
 .select-wrapper {
+
     position: relative;
 
     width: 100%;
 }
 
+
 .select-wrapper::after {
+
     content: "⌄";
 
     position: absolute;
@@ -395,7 +451,9 @@
     pointer-events: none;
 }
 
+
 .profile-input select {
+
     appearance: none;
 
     -webkit-appearance: none;
@@ -411,6 +469,7 @@
 /* Dropdown options */
 
 .profile-input select option {
+
     background: #ffffff;
 
     color: #332d35;
@@ -422,6 +481,7 @@
 ========================================================= */
 
 .profile-input textarea {
+
     min-height: 110px;
 
     resize: vertical;
@@ -433,6 +493,7 @@
 ========================================================= */
 
 .profile-input small {
+
     margin-top: 6px;
 
     color: #a398a5;
@@ -446,24 +507,34 @@
 ========================================================= */
 
 .hidden {
+
     display: none !important;
 }
 
+
 .conditional-field {
+
     animation:
         conditionalReveal 0.35s ease;
 }
 
+
 @keyframes conditionalReveal {
 
     from {
+
         opacity: 0;
+
         transform: translateY(-8px);
+
     }
 
     to {
+
         opacity: 1;
+
         transform: translateY(0);
+
     }
 
 }
@@ -474,6 +545,7 @@
 ========================================================= */
 
 .links-container {
+
     grid-column: 1 / -1;
 
     display: grid;
@@ -494,20 +566,29 @@
         linksReveal 0.4s ease;
 }
 
+
 .links-container.hidden {
+
     display: none;
 }
+
 
 @keyframes linksReveal {
 
     from {
+
         opacity: 0;
+
         transform: translateY(-8px);
+
     }
 
     to {
+
         opacity: 1;
+
         transform: translateY(0);
+
     }
 
 }
@@ -519,6 +600,7 @@
 ========================================================= */
 
 .document-upload {
+
     display: flex;
 
     align-items: center;
@@ -542,6 +624,7 @@
 /* Hide native file */
 
 .document-upload input[type="file"] {
+
     display: none;
 }
 
@@ -549,6 +632,7 @@
 /* Choose button */
 
 .document-upload-label {
+
     display: inline-flex;
 
     align-items: center;
@@ -580,6 +664,7 @@
 /* Hover does NOT change color */
 
 .document-upload-label:hover {
+
     background: #29232b;
 
     color: #ffffff !important;
@@ -589,6 +674,7 @@
 
 
 .document-upload span {
+
     min-width: 0;
 
     overflow: hidden;
@@ -608,6 +694,7 @@
 ========================================================= */
 
 .profile-submit {
+
     width: 100%;
 
     margin-top: 28px;
@@ -647,6 +734,7 @@
 /* Hover color SAME */
 
 .profile-submit:hover {
+
     background: #29232b;
 
     color: #ffffff;
@@ -657,18 +745,24 @@
         0 8px 20px rgba(41, 35, 43, 0.13);
 }
 
+
 .profile-submit:active {
+
     transform: translateY(0);
 }
 
+
 .profile-arrow {
+
     font-size: 18px;
 
     transition:
         transform 0.2s ease;
 }
 
+
 .profile-submit:hover .profile-arrow {
+
     transform: translateX(4px);
 }
 
@@ -680,34 +774,47 @@
 @media (max-width: 700px) {
 
     .profile-wrapper {
+
         padding: 30px 15px;
     }
 
+
     .profile-card {
+
         padding: 32px 24px;
 
         border-radius: 22px;
     }
 
+
     .profile-heading h1 {
+
         font-size: 36px;
     }
 
+
     .profile-fields {
+
         grid-template-columns: 1fr;
     }
+
 
     .full-width {
+
         grid-column: auto;
     }
 
+
     .links-container {
+
         grid-template-columns: 1fr;
 
         grid-column: auto;
     }
 
+
     .document-upload {
+
         flex-direction: column;
 
         align-items: stretch;
@@ -715,7 +822,9 @@
         padding: 10px;
     }
 
+
     .document-upload-label {
+
         width: 100%;
 
         box-sizing: border-box;
@@ -727,10 +836,13 @@
 @media (max-width: 420px) {
 
     .profile-card {
+
         padding: 28px 18px;
     }
 
+
     .profile-heading h1 {
+
         font-size: 31px;
     }
 

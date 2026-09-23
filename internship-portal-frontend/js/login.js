@@ -621,6 +621,10 @@ function clearErrors() {
    SUCCESS
    ========================================================= */
 
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
 function showSuccess(role) {
 
     const overlay =
@@ -642,20 +646,14 @@ function showSuccess(role) {
 
     continueButton.onclick = () => {
 
-        if (
-            role === "student"
-        ) {
+        sessionStorage.setItem(
+            "smartInternRole",
+            role
+        );
 
-            window.location.href =
-                "student-dashboard.html";
 
-        }
-        else {
-
-            window.location.href =
-                "company-dashboard.html";
-
-        }
+        window.location.href =
+            "profile-setup.html";
 
     };
 

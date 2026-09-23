@@ -5,7 +5,10 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>SmartIntern - Profile Setup</title>
 
@@ -14,7 +17,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
@@ -24,15 +31,27 @@
 
     <!-- Main CSS -->
 
-    <link rel="stylesheet" href="../css/variables.css">
+    <link
+        rel="stylesheet"
+        href="../css/variables.css"
+    >
 
-    <link rel="stylesheet" href="../css/base.css">
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
 
-    <link rel="stylesheet" href="../css/auth.css">
+    <link
+        rel="stylesheet"
+        href="../css/auth.css"
+    >
 
     <!-- Profile CSS -->
 
-    <link rel="stylesheet" href="../css/profile.css">
+    <link
+        rel="stylesheet"
+        href="../css/profile.css"
+    >
 
 </head>
 
@@ -101,7 +120,10 @@
                      STUDENT
                 ================================================== -->
 
-                <div id="studentFields" class="profile-fields">
+                <div
+                    id="studentFields"
+                    class="profile-fields"
+                >
 
 
                     <!-- Full Name -->
@@ -117,6 +139,11 @@
                             id="studentName"
                             placeholder="Enter your full name"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="studentNameError"
+                        ></span>
 
                     </div>
 
@@ -135,6 +162,11 @@
                             placeholder="Enter your phone number"
                         >
 
+                        <span
+                            class="profile-error"
+                            id="studentPhoneError"
+                        ></span>
+
                     </div>
 
 
@@ -151,6 +183,11 @@
                             id="university"
                             placeholder="Enter your university"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="universityError"
+                        ></span>
 
                     </div>
 
@@ -203,10 +240,15 @@
 
                         </div>
 
+                        <span
+                            class="profile-error"
+                            id="degreeError"
+                        ></span>
+
                     </div>
 
 
-                    <!-- Graduate Status -->
+                    <!-- Graduation Status -->
 
                     <div class="profile-input">
 
@@ -234,13 +276,18 @@
 
                         </div>
 
+                        <span
+                            class="profile-error"
+                            id="graduationStatusError"
+                        ></span>
+
                     </div>
 
 
                     <!-- Current Semester -->
 
                     <div
-                        class="profile-input"
+                        class="profile-input hidden"
                         id="semesterField"
                     >
 
@@ -292,6 +339,11 @@
 
                         </div>
 
+                        <span
+                            class="profile-error"
+                            id="semesterError"
+                        ></span>
+
                     </div>
 
 
@@ -314,17 +366,42 @@
                                     Select year
                                 </option>
 
-                                <option value="2026">2026</option>
-                                <option value="2025">2025</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
+                                <option value="2026">
+                                    2026
+                                </option>
+
+                                <option value="2025">
+                                    2025
+                                </option>
+
+                                <option value="2024">
+                                    2024
+                                </option>
+
+                                <option value="2023">
+                                    2023
+                                </option>
+
+                                <option value="2022">
+                                    2022
+                                </option>
+
+                                <option value="2021">
+                                    2021
+                                </option>
+
+                                <option value="2020">
+                                    2020
+                                </option>
 
                             </select>
 
                         </div>
+
+                        <span
+                            class="profile-error"
+                            id="graduationYearError"
+                        ></span>
 
                     </div>
 
@@ -344,6 +421,11 @@
                             type="date"
                             id="graduationDate"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="graduationDateError"
+                        ></span>
 
                     </div>
 
@@ -500,6 +582,11 @@
                             PDF, DOC or DOCX — maximum 5MB
                         </small>
 
+                        <span
+                            class="profile-error"
+                            id="resumeError"
+                        ></span>
+
                     </div>
 
 
@@ -529,6 +616,11 @@
                             id="companyName"
                             placeholder="Enter company name"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="companyNameError"
+                        ></span>
 
                     </div>
 
@@ -714,6 +806,11 @@
                             PDF, JPG, JPEG or PNG — maximum 5MB
                         </small>
 
+                        <span
+                            class="profile-error"
+                            id="tradeLicenseDocumentError"
+                        ></span>
+
                     </div>
 
 
@@ -745,6 +842,11 @@
                             type="date"
                             id="licenseExpiryDate"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="licenseExpiryDateError"
+                        ></span>
 
                     </div>
 
@@ -779,11 +881,15 @@
 
     <!-- GSAP -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    ></script>
+
 
     <!-- Profile JS -->
 
     <script src="../js/profile.js"></script>
+
 
 </body>
 

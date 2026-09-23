@@ -1,16 +1,16 @@
 /* =========================================================
-   SMARTINTERN — COMPANY DASHBOARD JS
-========================================================= */
+   SMARTINTERN COMPANY DASHBOARD
+   Three.js + GSAP + Dashboard Interactions
+   ========================================================= */
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
     loadCompanyData();
 
-    initDashboardAnimations();
+    initCompanyAnimations();
 
     initCompany3D();
-
-    initCompanyCardTilt();
 
     initMobileSidebar();
 
@@ -23,81 +23,98 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 /* =========================================================
    COMPANY DATA
-========================================================= */
+   ========================================================= */
 
 function loadCompanyData() {
 
-    const savedCompany =
-        sessionStorage.getItem("smartInternCompanyProfile");
+    const storedProfile =
+        sessionStorage.getItem(
+            "smartInternCompanyProfile"
+        );
 
-    if (!savedCompany) {
+
+    if (!storedProfile) {
         return;
     }
 
+
     try {
 
-        const company =
-            JSON.parse(savedCompany);
+        const profile =
+            JSON.parse(storedProfile);
+
 
         const companyName =
-            company.companyName ||
-            company.name ||
-            "TechCorp";
-
-        const initials =
-            getCompanyInitials(companyName);
+            profile.companyName ||
+            profile.name ||
+            "Company";
 
 
-        const sidebarName =
+        const elements = [
+
             document.getElementById(
                 "sidebarCompanyName"
-            );
+            ),
 
-        const topbarName =
             document.getElementById(
                 "topbarCompanyName"
+            )
+
+        ];
+
+
+        elements.forEach((element) => {
+
+            if (element) {
+
+                element.textContent =
+                    companyName;
+
+            }
+
+        });
+
+
+        const initials =
+            getCompanyInitials(
+                companyName
             );
 
-        const sidebarAvatar =
+
+        const avatarElements = [
+
             document.getElementById(
                 "sidebarCompanyAvatar"
-            );
+            ),
 
-        const topbarAvatar =
             document.getElementById(
-                "topbarCompanyAvatar"
-            );
+                "topbarAvatar"
+            )
+
+        ];
 
 
-        if (sidebarName) {
-            sidebarName.textContent =
-                companyName;
-        }
+        avatarElements.forEach((avatar) => {
+
+            if (avatar) {
+
+                avatar.textContent =
+                    initials;
+
+            }
+
+        });
 
 
-        if (topbarName) {
-            topbarName.textContent =
-                companyName;
-        }
+    }
+    catch (error) {
 
-
-        if (sidebarAvatar) {
-            sidebarAvatar.textContent =
-                initials;
-        }
-
-
-        if (topbarAvatar) {
-            topbarAvatar.textContent =
-                initials;
-        }
-
-    } catch (error) {
-
-        console.log(
-            "Could not load company profile."
+        console.error(
+            "Could not load company profile.",
+            error
         );
 
     }
@@ -105,15 +122,12 @@ function loadCompanyData() {
 }
 
 
+
 /* =========================================================
    COMPANY INITIALS
-========================================================= */
+   ========================================================= */
 
 function getCompanyInitials(name) {
-
-    if (!name) {
-        return "TC";
-    }
 
     const words =
         name
@@ -139,155 +153,127 @@ function getCompanyInitials(name) {
 }
 
 
+
 /* =========================================================
-   GSAP DASHBOARD ANIMATIONS
-========================================================= */
+   GSAP ANIMATIONS
+   ========================================================= */
 
-function initDashboardAnimations() {
+function initCompanyAnimations() {
 
-    if (typeof gsap === "undefined") {
+    if (
+        typeof gsap === "undefined"
+    ) {
         return;
     }
 
 
-    const timeline =
-        gsap.timeline({
-            defaults: {
-                ease: "power3.out"
-            }
-        });
-
-
-    timeline
-        .from(
-            ".company-topbar",
-            {
-                y: -25,
-                opacity: 0,
-                duration: .7
-            }
-        )
-        .from(
-            ".dashboard-hero",
-            {
-                y: 35,
-                opacity: 0,
-                duration: .8
-            },
-            "-=.35"
-        )
-        .from(
-            ".stat-card",
-            {
-                y: 25,
-                opacity: 0,
-                duration: .55,
-                stagger: .08
-            },
-            "-=.35"
-        )
-        .from(
-            ".dashboard-card",
-            {
-                y: 25,
-                opacity: 0,
-                duration: .55,
-                stagger: .07
-            },
-            "-=.3"
-        );
-
-
-    /* AI Card Floating */
-
-    gsap.to(
-        ".floating-ai-card",
+    gsap.from(
+        ".dashboard-topbar",
         {
-            y: -8,
-            duration: 2.2,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut"
+            opacity: 0,
+            y: -18,
+            duration: .6,
+            ease: "power3.out"
         }
     );
 
 
-    /* Candidate Card Floating */
-
-    gsap.to(
-        ".floating-candidate-card",
+    gsap.from(
+        ".dashboard-welcome",
         {
-            y: 7,
-            duration: 2.6,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            delay: .3
+            opacity: 0,
+            y: 25,
+            duration: .8,
+            delay: .1,
+            ease: "power3.out"
         }
     );
 
 
-    /* Orbit animation */
-
-    gsap.to(
-        ".orbit-one",
+    gsap.from(
+        ".profile-progress-card",
         {
-            rotation: 360,
-            duration: 18,
-            repeat: -1,
-            ease: "none"
+            opacity: 0,
+            y: 20,
+            duration: .6,
+            delay: .25,
+            ease: "power3.out"
         }
     );
 
 
-    gsap.to(
-        ".orbit-two",
+    gsap.from(
+        ".stat-card",
         {
-            rotation: -360,
-            duration: 24,
-            repeat: -1,
-            ease: "none"
+            opacity: 0,
+            y: 18,
+            duration: .5,
+            stagger: .08,
+            delay: .3,
+            ease: "power3.out"
         }
     );
 
 
-    gsap.to(
-        ".orbit-three",
+    gsap.from(
+        ".dashboard-section, .ai-match-card, .upcoming-card",
         {
-            rotation: 360,
-            duration: 30,
-            repeat: -1,
-            ease: "none"
+            opacity: 0,
+            y: 20,
+            duration: .55,
+            stagger: .08,
+            delay: .45,
+            ease: "power3.out"
         }
     );
+
 
 }
 
 
+
 /* =========================================================
-   THREE.JS 3D OBJECT
-========================================================= */
+   THREE.JS
+   ========================================================= */
 
 function initCompany3D() {
 
-    const canvas =
-        document.getElementById(
-            "companyDashboard3D"
+    if (
+        typeof THREE === "undefined"
+    ) {
+        return;
+    }
+
+
+    const visual =
+        document.querySelector(
+            ".welcome-visual"
         );
 
 
-    if (!canvas) {
+    if (!visual) {
         return;
     }
 
 
-    if (typeof THREE === "undefined") {
-        return;
-    }
+    /*
+     * Create canvas
+     */
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
 
 
-    const container =
-        canvas.parentElement;
+    canvas.className =
+        "company-dashboard-canvas";
+
+
+    visual.insertBefore(
+        canvas,
+        visual.firstChild
+    );
 
 
     const scene =
@@ -297,21 +283,24 @@ function initCompany3D() {
     const camera =
         new THREE.PerspectiveCamera(
             45,
-            container.clientWidth /
-            container.clientHeight,
+            1,
             .1,
             100
         );
 
 
-    camera.position.z = 4.2;
+    camera.position.z = 5;
 
 
     const renderer =
         new THREE.WebGLRenderer({
+
             canvas: canvas,
+
             alpha: true,
+
             antialias: true
+
         });
 
 
@@ -323,63 +312,85 @@ function initCompany3D() {
     );
 
 
-    renderer.setSize(
-        container.clientWidth,
-        container.clientHeight
+    function resize() {
+
+        const width =
+            visual.clientWidth;
+
+        const height =
+            visual.clientHeight;
+
+
+        renderer.setSize(
+            width,
+            height,
+            false
+        );
+
+
+        camera.aspect =
+            width / height;
+
+
+        camera.updateProjectionMatrix();
+
+    }
+
+
+    resize();
+
+
+    window.addEventListener(
+        "resize",
+        resize
     );
 
 
-    /* =====================================================
-       MAIN CRYSTAL
-    ===================================================== */
 
-    const crystalGeometry =
+    /* ================= CRYSTAL ================= */
+
+    const geometry =
         new THREE.IcosahedronGeometry(
-            1.15,
+            1.25,
             1
         );
 
 
-    const crystalMaterial =
-        new THREE.MeshPhysicalMaterial({
+    const material =
+        new THREE.MeshBasicMaterial({
 
             color: 0xb38bd7,
 
-            roughness: .18,
-
-            metalness: .05,
+            wireframe: true,
 
             transparent: true,
 
-            opacity: .72,
-
-            flatShading: true
+            opacity: .23
 
         });
 
 
     const crystal =
         new THREE.Mesh(
-            crystalGeometry,
-            crystalMaterial
+            geometry,
+            material
         );
 
 
     scene.add(crystal);
 
 
-    /* =====================================================
-       INNER WIRE
-    ===================================================== */
 
-    const wireGeometry =
+    /* ================= INNER CRYSTAL ================= */
+
+    const innerGeometry =
         new THREE.IcosahedronGeometry(
-            1.28,
+            .78,
             1
         );
 
 
-    const wireMaterial =
+    const innerMaterial =
         new THREE.MeshBasicMaterial({
 
             color: 0xe8a8c7,
@@ -388,82 +399,32 @@ function initCompany3D() {
 
             transparent: true,
 
-            opacity: .28
+            opacity: .16
 
         });
 
 
-    const wire =
+    const innerCrystal =
         new THREE.Mesh(
-            wireGeometry,
-            wireMaterial
+            innerGeometry,
+            innerMaterial
         );
 
 
-    scene.add(wire);
+    scene.add(innerCrystal);
 
 
-    /* =====================================================
-       LIGHTS
-    ===================================================== */
 
-    const ambientLight =
-        new THREE.AmbientLight(
-            0xffffff,
-            1.4
-        );
-
-
-    scene.add(ambientLight);
-
-
-    const purpleLight =
-        new THREE.PointLight(
-            0xb38bd7,
-            3,
-            8
-        );
-
-
-    purpleLight.position.set(
-        2,
-        2,
-        3
-    );
-
-
-    scene.add(purpleLight);
-
-
-    const pinkLight =
-        new THREE.PointLight(
-            0xe8a8c7,
-            2.5,
-            7
-        );
-
-
-    pinkLight.position.set(
-        -2,
-        -1,
-        2
-    );
-
-
-    scene.add(pinkLight);
-
-
-    /* =====================================================
-       PARTICLES
-    ===================================================== */
-
-    const particleCount = 120;
+    /* ================= PARTICLES ================= */
 
     const particleGeometry =
         new THREE.BufferGeometry();
 
 
-    const particlePositions =
+    const particleCount = 70;
+
+
+    const positions =
         new Float32Array(
             particleCount * 3
         );
@@ -471,33 +432,12 @@ function initCompany3D() {
 
     for (
         let i = 0;
-        i < particleCount;
+        i < particleCount * 3;
         i++
     ) {
 
-        const radius =
-            1.8 + Math.random() * 1.3;
-
-        const angle =
-            Math.random() * Math.PI * 2;
-
-        const height =
-            (Math.random() - .5) * 3;
-
-        particlePositions[
-            i * 3
-        ] =
-            Math.cos(angle) * radius;
-
-        particlePositions[
-            i * 3 + 1
-        ] =
-            height;
-
-        particlePositions[
-            i * 3 + 2
-        ] =
-            Math.sin(angle) * radius;
+        positions[i] =
+            (Math.random() - .5) * 6;
 
     }
 
@@ -505,7 +445,7 @@ function initCompany3D() {
     particleGeometry.setAttribute(
         "position",
         new THREE.BufferAttribute(
-            particlePositions,
+            positions,
             3
         )
     );
@@ -514,13 +454,13 @@ function initCompany3D() {
     const particleMaterial =
         new THREE.PointsMaterial({
 
-            color: 0xd9c4e8,
+            color: 0xb38bd7,
 
-            size: .025,
+            size: .035,
 
             transparent: true,
 
-            opacity: .8
+            opacity: .45
 
         });
 
@@ -535,57 +475,34 @@ function initCompany3D() {
     scene.add(particles);
 
 
-    /* =====================================================
-       MOUSE
-    ===================================================== */
+
+    /* ================= MOUSE ================= */
 
     let mouseX = 0;
     let mouseY = 0;
 
 
-    container.addEventListener(
-        "mousemove",
+    window.addEventListener(
+        "pointermove",
         (event) => {
 
-            const rect =
-                container.getBoundingClientRect();
-
-
             mouseX =
-                (
-                    (event.clientX - rect.left)
-                    /
-                    rect.width
-                    - .5
-                );
+                (event.clientX /
+                    window.innerWidth -
+                    .5) * .35;
 
 
             mouseY =
-                (
-                    (event.clientY - rect.top)
-                    /
-                    rect.height
-                    - .5
-                );
+                (event.clientY /
+                    window.innerHeight -
+                    .5) * .25;
 
         }
     );
 
 
-    container.addEventListener(
-        "mouseleave",
-        () => {
 
-            mouseX = 0;
-            mouseY = 0;
-
-        }
-    );
-
-
-    /* =====================================================
-       ANIMATION
-    ===================================================== */
+    /* ================= ANIMATION ================= */
 
     function animate() {
 
@@ -594,25 +511,23 @@ function initCompany3D() {
         );
 
 
-        crystal.rotation.y += .004;
-        crystal.rotation.x += .0015;
+        crystal.rotation.x += .002;
+        crystal.rotation.y += .003;
 
 
-        wire.rotation.y -= .0025;
-        wire.rotation.x += .001;
+        innerCrystal.rotation.x -= .0015;
+        innerCrystal.rotation.y -= .002;
 
 
-        particles.rotation.y += .0008;
-
-
-        crystal.rotation.y +=
-            (mouseX * .25 -
-             crystal.rotation.y * .01);
+        particles.rotation.y += .0005;
 
 
         crystal.rotation.x +=
-            (mouseY * .15 -
-             crystal.rotation.x * .01);
+            mouseY * .002;
+
+
+        crystal.rotation.y +=
+            mouseX * .002;
 
 
         renderer.render(
@@ -626,53 +541,21 @@ function initCompany3D() {
     animate();
 
 
-    /* =====================================================
-       RESIZE
-    ===================================================== */
+    /* ================= GSAP FLOAT ================= */
 
-    window.addEventListener(
-        "resize",
-        () => {
-
-            const width =
-                container.clientWidth;
-
-            const height =
-                container.clientHeight;
-
-
-            camera.aspect =
-                width / height;
-
-            camera.updateProjectionMatrix();
-
-
-            renderer.setSize(
-                width,
-                height
-            );
-
-        }
-    );
-
-
-    /* GSAP floating scale */
-
-    if (typeof gsap !== "undefined") {
+    if (
+        typeof gsap !== "undefined"
+    ) {
 
         gsap.to(
             crystal.scale,
             {
-                x: 1.07,
-                y: 1.07,
-                z: 1.07,
-
+                x: 1.08,
+                y: 1.08,
+                z: 1.08,
                 duration: 2.5,
-
                 repeat: -1,
-
                 yoyo: true,
-
                 ease: "sine.inOut"
             }
         );
@@ -682,99 +565,16 @@ function initCompany3D() {
 }
 
 
-/* =========================================================
-   CARD TILT
-========================================================= */
-
-function initCompanyCardTilt() {
-
-    const cards =
-        document.querySelectorAll(
-            ".stat-card, .dashboard-card"
-        );
-
-
-    cards.forEach(card => {
-
-        card.addEventListener(
-            "mousemove",
-            (event) => {
-
-                if (
-                    window.innerWidth < 1000
-                ) {
-                    return;
-                }
-
-
-                const rect =
-                    card.getBoundingClientRect();
-
-
-                const x =
-                    event.clientX -
-                    rect.left;
-
-
-                const y =
-                    event.clientY -
-                    rect.top;
-
-
-                const centerX =
-                    rect.width / 2;
-
-
-                const centerY =
-                    rect.height / 2;
-
-
-                const rotateX =
-                    ((y - centerY) /
-                    centerY) * -1.5;
-
-
-                const rotateY =
-                    ((x - centerX) /
-                    centerX) * 1.5;
-
-
-                card.style.transform =
-                    `
-                    perspective(900px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                    translateY(-2px)
-                    `;
-
-            }
-        );
-
-
-        card.addEventListener(
-            "mouseleave",
-            () => {
-
-                card.style.transform =
-                    "";
-
-            }
-        );
-
-    });
-
-}
-
 
 /* =========================================================
    MOBILE SIDEBAR
-========================================================= */
+   ========================================================= */
 
 function initMobileSidebar() {
 
-    const menuButton =
+    const menu =
         document.getElementById(
-            "mobileMenuButton"
+            "mobileMenu"
         );
 
 
@@ -791,7 +591,7 @@ function initMobileSidebar() {
 
 
     if (
-        !menuButton ||
+        !menu ||
         !sidebar ||
         !overlay
     ) {
@@ -825,7 +625,7 @@ function initMobileSidebar() {
     }
 
 
-    menuButton.addEventListener(
+    menu.addEventListener(
         "click",
         openSidebar
     );
@@ -841,21 +641,11 @@ function initMobileSidebar() {
         .querySelectorAll(
             ".sidebar-link"
         )
-        .forEach(link => {
+        .forEach((link) => {
 
             link.addEventListener(
                 "click",
-                () => {
-
-                    if (
-                        window.innerWidth <= 1000
-                    ) {
-
-                        closeSidebar();
-
-                    }
-
-                }
+                closeSidebar
             );
 
         });
@@ -863,9 +653,10 @@ function initMobileSidebar() {
 }
 
 
+
 /* =========================================================
    NOTIFICATIONS
-========================================================= */
+   ========================================================= */
 
 function initNotifications() {
 
@@ -883,56 +674,28 @@ function initNotifications() {
 
     const closeButton =
         document.getElementById(
-            "closeNotification"
+            "closeNotifications"
         );
 
 
-    const navButton =
-        document.getElementById(
-            "notificationNav"
-        );
-
-
-    if (!button || !panel) {
+    if (
+        !button ||
+        !panel
+    ) {
         return;
-    }
-
-
-    function togglePanel() {
-
-        panel.classList.toggle(
-            "show"
-        );
-
     }
 
 
     button.addEventListener(
         "click",
-        (event) => {
+        () => {
 
-            event.stopPropagation();
-
-            togglePanel();
+            panel.classList.toggle(
+                "show"
+            );
 
         }
     );
-
-
-    if (navButton) {
-
-        navButton.addEventListener(
-            "click",
-            (event) => {
-
-                event.preventDefault();
-
-                togglePanel();
-
-            }
-        );
-
-    }
 
 
     if (closeButton) {
@@ -972,33 +735,43 @@ function initNotifications() {
 }
 
 
+
 /* =========================================================
    LOGOUT
-========================================================= */
+   ========================================================= */
 
 function initLogout() {
 
-    const logoutButton =
+    const logout =
         document.getElementById(
-            "logoutButton"
+            "logoutLink"
         );
 
 
-    if (!logoutButton) {
+    if (!logout) {
         return;
     }
 
 
-    logoutButton.addEventListener(
+    logout.addEventListener(
         "click",
-        () => {
+        (event) => {
+
+            event.preventDefault();
+
 
             sessionStorage.removeItem(
                 "smartInternCompanyProfile"
             );
 
+
             sessionStorage.removeItem(
                 "smartInternLogin"
+            );
+
+
+            sessionStorage.removeItem(
+                "smartInternRole"
             );
 
 
@@ -1011,25 +784,29 @@ function initLogout() {
 }
 
 
+
 /* =========================================================
    HERO PARALLAX
-========================================================= */
+   ========================================================= */
 
 function initHeroParallax() {
 
     const hero =
         document.querySelector(
-            ".dashboard-hero"
+            ".dashboard-welcome"
         );
 
 
     const visual =
         document.querySelector(
-            "#companyHeroVisual"
+            ".welcome-visual"
         );
 
 
-    if (!hero || !visual) {
+    if (
+        !hero ||
+        !visual
+    ) {
         return;
     }
 
@@ -1038,35 +815,22 @@ function initHeroParallax() {
         "mousemove",
         (event) => {
 
-            if (
-                window.innerWidth < 1000
-            ) {
-                return;
-            }
-
-
             const rect =
                 hero.getBoundingClientRect();
 
 
             const x =
-                event.clientX -
-                rect.left -
-                rect.width / 2;
+                (event.clientX -
+                    rect.left) /
+                rect.width -
+                .5;
 
 
             const y =
-                event.clientY -
-                rect.top -
-                rect.height / 2;
-
-
-            const moveX =
-                x / rect.width * 12;
-
-
-            const moveY =
-                y / rect.height * 12;
+                (event.clientY -
+                    rect.top) /
+                rect.height -
+                .5;
 
 
             if (
@@ -1076,10 +840,11 @@ function initHeroParallax() {
                 gsap.to(
                     visual,
                     {
-                        x: moveX,
-                        y: moveY,
-                        duration: .6,
-                        ease: "power2.out"
+                        x: x * 10,
+                        y: y * 7,
+                        duration: .5,
+                        ease: "power2.out",
+                        overwrite: true
                     }
                 );
 
