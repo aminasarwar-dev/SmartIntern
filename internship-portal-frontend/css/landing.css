@@ -24,6 +24,7 @@ button {
     font-family: inherit;
 }
 
+
 /* ================= NAVBAR ================= */
 
 .navbar {
@@ -59,41 +60,18 @@ button {
     gap: 11px;
 }
 
-.logo-mark {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
 
-    background: linear-gradient(
-        135deg,
-        #b78de4,
-        #e8a8c7
-    );
+/* ================= NEW LOGO IMAGE ================= */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
+.logo-image {
+    width: 52px;
+    height: 52px;
 
-    transform: rotate(-5deg);
-}
+    object-fit: contain;
 
-.logo-mark span {
-    width: 4px;
-    border-radius: 5px;
-    background: white;
-}
+    display: block;
 
-.logo-mark span:nth-child(1) {
-    height: 11px;
-}
-
-.logo-mark span:nth-child(2) {
-    height: 20px;
-}
-
-.logo-mark span:nth-child(3) {
-    height: 15px;
+    flex-shrink: 0;
 }
 
 .logo-text {
@@ -104,6 +82,9 @@ button {
 .logo-text strong {
     font-weight: 700;
 }
+
+
+/* ================= NAV ================= */
 
 .navbar nav {
     display: flex;
@@ -166,8 +147,9 @@ button {
 /* ================= HERO ================= */
 
 .hero {
-    min-height: 900px;
-    padding: 170px 7% 90px;
+    min-height: 760px;
+
+    padding: 85px 7% 90px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -552,9 +534,20 @@ button {
 }
 
 @keyframes scrollDown {
-    0% { top: 0; opacity: 1; }
-    80% { top: 60px; opacity: 0; }
-    100% { top: 0; opacity: 0; }
+    0% {
+        top: 0;
+        opacity: 1;
+    }
+
+    80% {
+        top: 60px;
+        opacity: 0;
+    }
+
+    100% {
+        top: 0;
+        opacity: 0;
+    }
 }
 
 
@@ -605,10 +598,12 @@ button {
     border-radius: 50%;
 
     background:
-        radial-gradient(circle at 30% 25%,
-        #f5dff0,
-        #ead8ef 45%,
-        #d7c0e3);
+        radial-gradient(
+            circle at 30% 25%,
+            #f5dff0,
+            #ead8ef 45%,
+            #d7c0e3
+        );
 
     display: flex;
     flex-direction: column;
@@ -1180,6 +1175,20 @@ footer {
     gap: 10px;
 }
 
+
+/* ================= FOOTER LOGO IMAGE ================= */
+
+.footer-logo-image {
+    width: 45px;
+    height: 45px;
+
+    object-fit: contain;
+
+    display: block;
+
+    flex-shrink: 0;
+}
+
 .footer-logo strong {
     font-size: 18px;
 }
@@ -1234,7 +1243,7 @@ footer > p {
 
     .hero {
         grid-template-columns: 1fr;
-        padding-top: 150px;
+        padding-top: 130px;
     }
 
     .hero-content {
@@ -1291,10 +1300,20 @@ footer > p {
     }
 }
 
+
 @media (max-width: 650px) {
 
     .navbar {
         height: 65px;
+    }
+
+    .logo-image {
+        width: 43px;
+        height: 43px;
+    }
+
+    .logo-text {
+        font-size: 18px;
     }
 
     .nav-buttons {
