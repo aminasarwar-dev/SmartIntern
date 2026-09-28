@@ -45,6 +45,9 @@
         rel="stylesheet"
         href="../css/auth.css"
     >
+    <link 
+        rel="stylesheet"
+        href="../css/autofill-fix.css">
 
     <!-- Profile CSS -->
 
@@ -78,11 +81,11 @@
             <div class="profile-heading">
 
                 <h1>
-                    Complete your <em>profile.</em>
+                    Create your <em>Account.</em>
                 </h1>
 
                 <p id="profileSubtitle">
-                    Tell us a little about yourself.
+                    Start your journey with SmartIntern.
                 </p>
 
             </div>
@@ -143,6 +146,50 @@
                         <span
                             class="profile-error"
                             id="studentNameError"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="profile-input">
+
+                        <label for="studentEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="studentEmail"
+                            placeholder="Enter your email address"
+                        >
+
+                        <span
+                            class="profile-error"
+                            id="studentEmailError"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="profile-input">
+
+                        <label for="studentPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="studentPassword"
+                            placeholder="Create your password"
+                        >
+
+                        <span
+                            class="profile-error"
+                            id="studentPasswordError"
                         ></span>
 
                     </div>
@@ -625,6 +672,50 @@
                     </div>
 
 
+                    <!-- Email -->
+
+                    <div class="profile-input">
+
+                        <label for="companyEmail">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="companyEmail"
+                            placeholder="Enter your company email"
+                        >
+
+                        <span
+                            class="profile-error"
+                            id="companyEmailError"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="profile-input">
+
+                        <label for="companyPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="companyPassword"
+                            placeholder="Create your password"
+                        >
+
+                        <span
+                            class="profile-error"
+                            id="companyPasswordError"
+                        ></span>
+
+                    </div>
+
+
                     <!-- Industry -->
 
                     <div class="profile-input">
@@ -685,6 +776,11 @@
 
                         </div>
 
+                        <span
+                            class="profile-error"
+                            id="industryError"
+                        ></span>
+
                     </div>
 
 
@@ -701,6 +797,11 @@
                             id="contactPerson"
                             placeholder="Enter contact person's name"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="contactPersonError"
+                        ></span>
 
                     </div>
 
@@ -719,6 +820,11 @@
                             placeholder="Enter company contact number"
                         >
 
+                        <span
+                            class="profile-error"
+                            id="companyPhoneError"
+                        ></span>
+
                     </div>
 
 
@@ -736,6 +842,11 @@
                             placeholder="City, Country"
                         >
 
+                        <span
+                            class="profile-error"
+                            id="companyLocationError"
+                        ></span>
+
                     </div>
 
 
@@ -745,7 +856,6 @@
 
                         <label for="companyWebsite">
                             Company Website
-                            <span>(Optional)</span>
                         </label>
 
                         <input
@@ -753,6 +863,11 @@
                             id="companyWebsite"
                             placeholder="https://yourcompany.com"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="companyWebsiteError"
+                        ></span>
 
                     </div>
 
@@ -826,6 +941,11 @@
                             type="date"
                             id="licenseIssueDate"
                         >
+
+                        <span
+                            class="profile-error"
+                            id="licenseIssueDateError"
+                        ></span>
 
                     </div>
 

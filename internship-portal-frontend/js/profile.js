@@ -30,83 +30,65 @@ document.addEventListener("DOMContentLoaded", () => {
 function initRoleSwitch() {
 
     const roleButtons =
-        document.querySelectorAll(
-            ".profile-role-btn"
-        );
+        document.querySelectorAll(".profile-role-btn");
 
     const studentFields =
-        document.getElementById(
-            "studentFields"
-        );
+        document.getElementById("studentFields");
 
     const companyFields =
-        document.getElementById(
-            "companyFields"
-        );
+        document.getElementById("companyFields");
 
     const subtitle =
-        document.getElementById(
-            "profileSubtitle"
-        );
+        document.getElementById("profileSubtitle");
 
 
     roleButtons.forEach((button) => {
 
-        button.addEventListener(
-            "click",
-            () => {
+        button.addEventListener("click", () => {
 
-                const role =
-                    button.dataset.role;
+            const role = button.dataset.role;
 
 
-                roleButtons.forEach((item) => {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                });
+            roleButtons.forEach((item) => {
+                item.classList.remove("active");
+            });
 
 
-                button.classList.add(
-                    "active"
+            button.classList.add("active");
+
+
+            if (role === "student") {
+
+                studentFields.classList.remove("hidden");
+
+                companyFields.classList.add("hidden");
+
+                
+
+                sessionStorage.setItem(
+                    "smartInternRole",
+                    "student"
                 );
 
-
-                if (role === "student") {
-
-                    studentFields.classList.remove(
-                        "hidden"
-                    );
-
-                    companyFields.classList.add(
-                        "hidden"
-                    );
-
-                    subtitle.textContent =
-                        "Tell us a little about yourself.";
-
-                }
+            }
 
 
-                if (role === "company") {
+            if (role === "company") {
 
-                    companyFields.classList.remove(
-                        "hidden"
-                    );
+                companyFields.classList.remove("hidden");
 
-                    studentFields.classList.add(
-                        "hidden"
-                    );
+                studentFields.classList.add("hidden");
 
-                    subtitle.textContent =
-                        "Tell us a little about your company.";
+                
 
-                }
+                sessionStorage.setItem(
+                    "smartInternRole",
+                    "company"
+                );
 
             }
-        );
+
+        });
 
     });
 
@@ -120,9 +102,7 @@ function initRoleSwitch() {
 function loadSavedRole() {
 
     const savedRole =
-        sessionStorage.getItem(
-            "smartInternRole"
-        );
+        sessionStorage.getItem("smartInternRole");
 
 
     if (!savedRole) {
@@ -137,9 +117,7 @@ function loadSavedRole() {
 
 
     if (button) {
-
         button.click();
-
     }
 
 }
@@ -152,9 +130,7 @@ function loadSavedRole() {
 function initGraduationFields() {
 
     const graduationStatus =
-        document.getElementById(
-            "graduationStatus"
-        );
+        document.getElementById("graduationStatus");
 
 
     if (!graduationStatus) {
@@ -179,69 +155,63 @@ function initGraduationFields() {
 
 function updateGraduationFields() {
 
+    const graduationStatus =
+        document.getElementById("graduationStatus");
+
+    if (!graduationStatus) {
+        return;
+    }
+
+
     const status =
-        document.getElementById(
-            "graduationStatus"
-        ).value;
+        graduationStatus.value;
 
 
     const semesterField =
-        document.getElementById(
-            "semesterField"
-        );
+        document.getElementById("semesterField");
 
     const graduationYearField =
-        document.getElementById(
-            "graduationYearField"
-        );
+        document.getElementById("graduationYearField");
 
     const graduationDateField =
-        document.getElementById(
-            "graduationDateField"
-        );
+        document.getElementById("graduationDateField");
 
 
-    /* Hide all conditional fields */
+    if (semesterField) {
+        semesterField.classList.add("hidden");
+    }
 
-    semesterField.classList.add(
-        "hidden"
-    );
+    if (graduationYearField) {
+        graduationYearField.classList.add("hidden");
+    }
 
-    graduationYearField.classList.add(
-        "hidden"
-    );
-
-    graduationDateField.classList.add(
-        "hidden"
-    );
+    if (graduationDateField) {
+        graduationDateField.classList.add("hidden");
+    }
 
 
-    /* =====================================================
-       YES = GRADUATED
-       ===================================================== */
+    /* Graduated */
 
     if (status === "yes") {
 
-        graduationYearField.classList.remove(
-            "hidden"
-        );
+        if (graduationYearField) {
+            graduationYearField.classList.remove("hidden");
+        }
 
-        graduationDateField.classList.remove(
-            "hidden"
-        );
+        if (graduationDateField) {
+            graduationDateField.classList.remove("hidden");
+        }
 
     }
 
 
-    /* =====================================================
-       NO = NOT GRADUATED
-       ===================================================== */
+    /* Not Graduated */
 
     if (status === "no") {
 
-        semesterField.classList.remove(
-            "hidden"
-        );
+        if (semesterField) {
+            semesterField.classList.remove("hidden");
+        }
 
     }
 
@@ -255,48 +225,31 @@ function updateGraduationFields() {
 function initProfessionalLinks() {
 
     const professionalLinks =
-        document.getElementById(
-            "professionalLinks"
-        );
+        document.getElementById("professionalLinks");
 
     const linksFields =
-        document.getElementById(
-            "professionalLinksFields"
-        );
+        document.getElementById("professionalLinksFields");
 
 
-    if (
-        !professionalLinks ||
-        !linksFields
-    ) {
+    if (!professionalLinks || !linksFields) {
         return;
     }
 
 
-    professionalLinks.addEventListener(
-        "change",
-        () => {
+    professionalLinks.addEventListener("change", () => {
 
-            if (
-                professionalLinks.value ===
-                "show"
-            ) {
+        if (professionalLinks.value === "show") {
 
-                linksFields.classList.remove(
-                    "hidden"
-                );
-
-            }
-            else {
-
-                linksFields.classList.add(
-                    "hidden"
-                );
-
-            }
+            linksFields.classList.remove("hidden");
 
         }
-    );
+        else {
+
+            linksFields.classList.add("hidden");
+
+        }
+
+    });
 
 }
 
@@ -307,47 +260,43 @@ function initProfessionalLinks() {
 
 function initFileInputs() {
 
-
     /* =========================
-       CV / RESUME
+       RESUME
     ========================= */
 
     const resume =
-        document.getElementById(
-            "resume"
-        );
+        document.getElementById("resume");
 
     const resumeName =
-        document.getElementById(
-            "resumeName"
-        );
+        document.getElementById("resumeName");
 
 
     if (resume) {
 
-        resume.addEventListener(
-            "change",
-            () => {
+        resume.addEventListener("change", () => {
 
-                const file =
-                    resume.files[0];
+            const file =
+                resume.files[0];
 
 
-                if (file) {
+            if (file) {
 
+                if (resumeName) {
                     resumeName.textContent =
                         file.name;
-
-                }
-                else {
-
-                    resumeName.textContent =
-                        "No file selected";
-
                 }
 
             }
-        );
+            else {
+
+                if (resumeName) {
+                    resumeName.textContent =
+                        "No file selected";
+                }
+
+            }
+
+        });
 
     }
 
@@ -369,29 +318,30 @@ function initFileInputs() {
 
     if (tradeLicense) {
 
-        tradeLicense.addEventListener(
-            "change",
-            () => {
+        tradeLicense.addEventListener("change", () => {
 
-                const file =
-                    tradeLicense.files[0];
+            const file =
+                tradeLicense.files[0];
 
 
-                if (file) {
+            if (file) {
 
+                if (tradeLicenseName) {
                     tradeLicenseName.textContent =
                         file.name;
-
-                }
-                else {
-
-                    tradeLicenseName.textContent =
-                        "No file selected";
-
                 }
 
             }
-        );
+            else {
+
+                if (tradeLicenseName) {
+                    tradeLicenseName.textContent =
+                        "No file selected";
+                }
+
+            }
+
+        });
 
     }
 
@@ -405,9 +355,7 @@ function initFileInputs() {
 function initProfileForm() {
 
     const form =
-        document.getElementById(
-            "profileForm"
-        );
+        document.getElementById("profileForm");
 
 
     if (!form) {
@@ -415,44 +363,40 @@ function initProfileForm() {
     }
 
 
-    form.addEventListener(
-        "submit",
-        (event) => {
+    form.addEventListener("submit", (event) => {
 
-            event.preventDefault();
+        event.preventDefault();
 
-            clearErrors();
+        clearErrors();
 
 
-            const role =
-                sessionStorage.getItem(
-                    "smartInternRole"
-                ) ||
-                getActiveRole();
+        const role =
+            sessionStorage.getItem(
+                "smartInternRole"
+            ) || getActiveRole();
 
 
-            if (role === "student") {
+        if (role === "student") {
 
-                handleStudentSubmit();
-
-            }
-
-            else if (role === "company") {
-
-                handleCompanySubmit();
-
-            }
-
-            else {
-
-                alert(
-                    "Please select Student or Company."
-                );
-
-            }
+            handleStudentSubmit();
 
         }
-    );
+
+        else if (role === "company") {
+
+            handleCompanySubmit();
+
+        }
+
+        else {
+
+            showRoleError(
+                "Please select Student or Company."
+            );
+
+        }
+
+    });
 
 }
 
@@ -488,75 +432,54 @@ function handleStudentSubmit() {
     let valid = true;
 
 
-    const name =
-        document.getElementById(
-            "studentName"
-        ).value.trim();
+    /* =========================
+       BASIC INFORMATION
+    ========================= */
 
+    const name =
+        getValue("studentName");
+
+    const email =
+        getValue("studentEmail");
+
+    const password =
+        getValue("studentPassword");
 
     const phone =
-        document.getElementById(
-            "studentPhone"
-        ).value.trim();
-
+        getValue("studentPhone");
 
     const university =
-        document.getElementById(
-            "university"
-        ).value.trim();
-
+        getValue("university");
 
     const degree =
-        document.getElementById(
-            "degree"
-        ).value;
-
+        getValue("degree");
 
     const graduationStatus =
-        document.getElementById(
-            "graduationStatus"
-        ).value;
-
+        getValue("graduationStatus");
 
     const semester =
-        document.getElementById(
-            "semester"
-        ).value;
-
+        getValue("semester");
 
     const graduationYear =
-        document.getElementById(
-            "graduationYear"
-        ).value;
-
+        getValue("graduationYear");
 
     const graduationDate =
-        document.getElementById(
-            "graduationDate"
-        ).value;
-
+        getValue("graduationDate");
 
     const skills =
-        document.getElementById(
-            "skills"
-        ).value.trim();
-
+        getValue("skills");
 
     const location =
-        document.getElementById(
-            "studentLocation"
-        ).value.trim();
+        getValue("studentLocation");
 
 
     const resume =
-        document.getElementById(
-            "resume"
-        );
+        document.getElementById("resume");
 
 
-    /* =====================================================
-       BASIC VALIDATION
-       ===================================================== */
+    /* =========================
+       NAME
+    ========================= */
 
     if (!name) {
 
@@ -570,6 +493,52 @@ function handleStudentSubmit() {
     }
 
 
+    /* =========================
+       EMAIL
+    ========================= */
+
+    if (!email) {
+
+        showError(
+            "studentEmailError",
+            "Please enter your email."
+        );
+
+        valid = false;
+
+    }
+    else if (!isValidEmail(email)) {
+
+        showError(
+            "studentEmailError",
+            "Please enter a valid email address."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
+       PASSWORD
+    ========================= */
+
+    if (!password) {
+
+        showError(
+            "studentPasswordError",
+            "Please enter your password."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
+       PHONE
+    ========================= */
+
     if (!phone) {
 
         showError(
@@ -581,6 +550,10 @@ function handleStudentSubmit() {
 
     }
 
+
+    /* =========================
+       UNIVERSITY
+    ========================= */
 
     if (!university) {
 
@@ -594,6 +567,10 @@ function handleStudentSubmit() {
     }
 
 
+    /* =========================
+       DEGREE
+    ========================= */
+
     if (!degree) {
 
         showError(
@@ -605,6 +582,10 @@ function handleStudentSubmit() {
 
     }
 
+
+    /* =========================
+       GRADUATION STATUS
+    ========================= */
 
     if (!graduationStatus) {
 
@@ -618,13 +599,11 @@ function handleStudentSubmit() {
     }
 
 
-    /* =====================================================
+    /* =========================
        NOT GRADUATED
-       ===================================================== */
+    ========================= */
 
-    if (
-        graduationStatus === "no"
-    ) {
+    if (graduationStatus === "no") {
 
         if (!semester) {
 
@@ -640,16 +619,11 @@ function handleStudentSubmit() {
     }
 
 
-    /* =====================================================
+    /* =========================
        GRADUATED
-       ===================================================== */
+    ========================= */
 
-    if (
-        graduationStatus === "yes"
-    ) {
-
-
-        /* Graduation Year */
+    if (graduationStatus === "yes") {
 
         if (!graduationYear) {
 
@@ -662,8 +636,6 @@ function handleStudentSubmit() {
 
         }
 
-
-        /* Graduation Date */
 
         if (!graduationDate) {
 
@@ -679,12 +651,44 @@ function handleStudentSubmit() {
     }
 
 
-    /* =====================================================
-       CV / RESUME
-       ===================================================== */
+    /* =========================
+       SKILLS
+    ========================= */
+
+    if (!skills) {
+
+        showError(
+            "skillsError",
+            "Please enter your skills."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
+       LOCATION
+    ========================= */
+
+    if (!location) {
+
+        showError(
+            "studentLocationError",
+            "Please enter your location."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
+       RESUME
+    ========================= */
 
     const resumeFile =
-        resume.files[0];
+        resume?.files?.[0];
 
 
     if (!resumeFile) {
@@ -726,10 +730,7 @@ function handleStudentSubmit() {
         }
 
 
-        if (
-            resumeFile.size >
-            maxSize
-        ) {
+        if (resumeFile.size > maxSize) {
 
             showError(
                 "resumeError",
@@ -743,42 +744,44 @@ function handleStudentSubmit() {
     }
 
 
+    /* =========================
+       STOP IF INVALID
+    ========================= */
+
     if (!valid) {
         return;
     }
 
 
-    /* =====================================================
-       PROFESSIONAL LINKS
-       ===================================================== */
+    /* =========================
+       OPTIONAL LINKS
+    ========================= */
 
     const linkedin =
-        document.getElementById(
-            "linkedin"
-        )?.value.trim() || "";
-
+        getValue("linkedin");
 
     const github =
-        document.getElementById(
-            "github"
-        )?.value.trim() || "";
-
+        getValue("github");
 
     const portfolio =
-        document.getElementById(
-            "portfolio"
-        )?.value.trim() || "";
+        getValue("portfolio");
 
 
-    /* =====================================================
+    /* =========================
        STUDENT PROFILE
-       ===================================================== */
+    ========================= */
 
     const studentProfile = {
 
         role: "student",
 
         name: name,
+
+        fullName: name,
+
+        email: email,
+
+        password: password,
 
         phone: phone,
 
@@ -790,6 +793,11 @@ function handleStudentSubmit() {
             graduationStatus,
 
         semester:
+            graduationStatus === "no"
+                ? semester
+                : "",
+
+        currentSemester:
             graduationStatus === "no"
                 ? semester
                 : "",
@@ -814,33 +822,29 @@ function handleStudentSubmit() {
 
         portfolio: portfolio,
 
-
-        /* =========================
-           CV / RESUME
-        ========================= */
-
         resume: {
 
             name:
-                resume.files[0]?.name || "",
+                resumeFile.name,
 
             type:
-                resume.files[0]?.type || ""
+                resumeFile.type,
+
+            size:
+                resumeFile.size
 
         }
 
     };
 
 
-    /* =====================================================
-       SAVE STUDENT PROFILE
-       ===================================================== */
+    /* =========================
+       SAVE
+    ========================= */
 
     sessionStorage.setItem(
         "smartInternStudentProfile",
-        JSON.stringify(
-            studentProfile
-        )
+        JSON.stringify(studentProfile)
     );
 
 
@@ -850,9 +854,9 @@ function handleStudentSubmit() {
     );
 
 
-    /* =====================================================
-       STUDENT DASHBOARD
-       ===================================================== */
+    /* =========================
+       GO TO DASHBOARD
+    ========================= */
 
     window.location.href =
         "student-dashboard.html";
@@ -869,46 +873,36 @@ function handleCompanySubmit() {
     let valid = true;
 
 
-    const companyName =
-        document.getElementById(
-            "companyName"
-        ).value.trim();
+    /* =========================
+       BASIC INFORMATION
+    ========================= */
 
+    const companyName =
+        getValue("companyName");
+
+    const email =
+        getValue("companyEmail");
+
+    const password =
+        getValue("companyPassword");
 
     const industry =
-        document.getElementById(
-            "industry"
-        ).value;
-
+        getValue("industry");
 
     const contactPerson =
-        document.getElementById(
-            "contactPerson"
-        ).value.trim();
-
+        getValue("contactPerson");
 
     const companyPhone =
-        document.getElementById(
-            "companyPhone"
-        ).value.trim();
-
+        getValue("companyPhone");
 
     const companyLocation =
-        document.getElementById(
-            "companyLocation"
-        ).value.trim();
-
+        getValue("companyLocation");
 
     const companyWebsite =
-        document.getElementById(
-            "companyWebsite"
-        ).value.trim();
-
+        getValue("companyWebsite");
 
     const companyDescription =
-        document.getElementById(
-            "companyDescription"
-        ).value.trim();
+        getValue("companyDescription");
 
 
     const tradeLicense =
@@ -918,20 +912,15 @@ function handleCompanySubmit() {
 
 
     const licenseIssueDate =
-        document.getElementById(
-            "licenseIssueDate"
-        ).value;
-
+        getValue("licenseIssueDate");
 
     const licenseExpiryDate =
-        document.getElementById(
-            "licenseExpiryDate"
-        ).value;
+        getValue("licenseExpiryDate");
 
 
-    /* =====================================================
-       COMPANY VALIDATION
-       ===================================================== */
+    /* =========================
+       COMPANY NAME
+    ========================= */
 
     if (!companyName) {
 
@@ -945,9 +934,56 @@ function handleCompanySubmit() {
     }
 
 
+    /* =========================
+       EMAIL
+    ========================= */
+
+    if (!email) {
+
+        showError(
+            "companyEmailError",
+            "Please enter your email."
+        );
+
+        valid = false;
+
+    }
+    else if (!isValidEmail(email)) {
+
+        showError(
+            "companyEmailError",
+            "Please enter a valid email address."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
+       PASSWORD
+    ========================= */
+
+    if (!password) {
+
+        showError(
+            "companyPasswordError",
+            "Please enter your password."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
+       INDUSTRY
+    ========================= */
+
     if (!industry) {
 
-        alert(
+        showError(
+            "industryError",
             "Please select your industry."
         );
 
@@ -956,9 +992,14 @@ function handleCompanySubmit() {
     }
 
 
+    /* =========================
+       CONTACT PERSON
+    ========================= */
+
     if (!contactPerson) {
 
-        alert(
+        showError(
+            "contactPersonError",
             "Please enter the contact person's name."
         );
 
@@ -967,9 +1008,14 @@ function handleCompanySubmit() {
     }
 
 
+    /* =========================
+       PHONE
+    ========================= */
+
     if (!companyPhone) {
 
-        alert(
+        showError(
+            "companyPhoneError",
             "Please enter the company contact number."
         );
 
@@ -978,9 +1024,14 @@ function handleCompanySubmit() {
     }
 
 
+    /* =========================
+       LOCATION
+    ========================= */
+
     if (!companyLocation) {
 
-        alert(
+        showError(
+            "companyLocationError",
             "Please enter the company location."
         );
 
@@ -989,12 +1040,54 @@ function handleCompanySubmit() {
     }
 
 
-    /* =====================================================
+    /* =========================
+       WEBSITE
+    ========================= */
+
+    if (!companyWebsite) {
+
+        showError(
+            "companyWebsiteError",
+            "Please enter your company website."
+        );
+
+        valid = false;
+
+    }
+    else if (!isValidWebsite(companyWebsite)) {
+
+        showError(
+            "companyWebsiteError",
+            "Please enter a valid website URL."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
+       DESCRIPTION
+    ========================= */
+
+    if (!companyDescription) {
+
+        showError(
+            "companyDescriptionError",
+            "Please enter your company description."
+        );
+
+        valid = false;
+
+    }
+
+
+    /* =========================
        TRADE LICENSE
-       ===================================================== */
+    ========================= */
 
     const tradeFile =
-        tradeLicense.files[0];
+        tradeLicense?.files?.[0];
 
 
     if (!tradeFile) {
@@ -1036,10 +1129,7 @@ function handleCompanySubmit() {
         }
 
 
-        if (
-            tradeFile.size >
-            maxSize
-        ) {
+        if (tradeFile.size > maxSize) {
 
             showError(
                 "tradeLicenseDocumentError",
@@ -1053,13 +1143,14 @@ function handleCompanySubmit() {
     }
 
 
-    /* =====================================================
-       LICENSE DATES
-       ===================================================== */
+    /* =========================
+       LICENSE ISSUE DATE
+    ========================= */
 
     if (!licenseIssueDate) {
 
-        alert(
+        showError(
+            "licenseIssueDateError",
             "Please select the license issue date."
         );
 
@@ -1067,6 +1158,10 @@ function handleCompanySubmit() {
 
     }
 
+
+    /* =========================
+       LICENSE EXPIRY DATE
+    ========================= */
 
     if (!licenseExpiryDate) {
 
@@ -1080,20 +1175,20 @@ function handleCompanySubmit() {
     }
 
 
+    /* =========================
+       DATE COMPARISON
+    ========================= */
+
     if (
         licenseIssueDate &&
         licenseExpiryDate
     ) {
 
         const issue =
-            new Date(
-                licenseIssueDate
-            );
+            new Date(licenseIssueDate);
 
         const expiry =
-            new Date(
-                licenseExpiryDate
-            );
+            new Date(licenseExpiryDate);
 
 
         if (expiry <= issue) {
@@ -1110,14 +1205,18 @@ function handleCompanySubmit() {
     }
 
 
+    /* =========================
+       STOP IF INVALID
+    ========================= */
+
     if (!valid) {
         return;
     }
 
 
-    /* =====================================================
+    /* =========================
        COMPANY PROFILE
-       ===================================================== */
+    ========================= */
 
     const companyProfile = {
 
@@ -1125,6 +1224,12 @@ function handleCompanySubmit() {
 
         companyName:
             companyName,
+
+        email:
+            email,
+
+        password:
+            password,
 
         industry:
             industry,
@@ -1144,17 +1249,18 @@ function handleCompanySubmit() {
         description:
             companyDescription,
 
-
         tradeLicenseDocument: {
 
             name:
-                tradeLicense.files[0]?.name || "",
+                tradeFile.name,
 
             type:
-                tradeLicense.files[0]?.type || ""
+                tradeFile.type,
+
+            size:
+                tradeFile.size
 
         },
-
 
         licenseIssueDate:
             licenseIssueDate,
@@ -1165,15 +1271,13 @@ function handleCompanySubmit() {
     };
 
 
-    /* =====================================================
-       SAVE COMPANY PROFILE
-       ===================================================== */
+    /* =========================
+       SAVE
+    ========================= */
 
     sessionStorage.setItem(
         "smartInternCompanyProfile",
-        JSON.stringify(
-            companyProfile
-        )
+        JSON.stringify(companyProfile)
     );
 
 
@@ -1183,12 +1287,81 @@ function handleCompanySubmit() {
     );
 
 
-    /* =====================================================
-       COMPANY DASHBOARD
-       ===================================================== */
+    /* =========================
+       GO TO DASHBOARD
+    ========================= */
 
     window.location.href =
         "company-dashboard.html";
+
+}
+
+
+/* =========================================================
+   GET VALUE SAFELY
+   ========================================================= */
+
+function getValue(id) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (!element) {
+        return "";
+    }
+
+
+    return element.value.trim();
+
+}
+
+
+/* =========================================================
+   EMAIL VALIDATION
+   ========================================================= */
+
+function isValidEmail(email) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        email
+    );
+
+}
+
+
+/* =========================================================
+   WEBSITE VALIDATION
+   ========================================================= */
+
+function isValidWebsite(website) {
+
+    let value = website.trim();
+
+
+    if (
+        !value.startsWith("http://") &&
+        !value.startsWith("https://")
+    ) {
+
+        value =
+            "https://" + value;
+
+    }
+
+
+    try {
+
+        new URL(value);
+
+        return true;
+
+    }
+    catch {
+
+        return false;
+
+    }
 
 }
 
@@ -1219,23 +1392,69 @@ function showError(
 
 
 /* =========================================================
+   ROLE ERROR
+   ========================================================= */
+
+function showRoleError(message) {
+
+    let error =
+        document.querySelector(
+            ".profile-role-error"
+        );
+
+
+    if (!error) {
+
+        error =
+            document.createElement("span");
+
+        error.className =
+            "profile-role-error";
+
+
+        const role =
+            document.querySelector(
+                ".profile-role"
+            );
+
+
+        if (role) {
+            role.appendChild(error);
+        }
+
+    }
+
+
+    error.textContent =
+        message;
+
+}
+
+
+/* =========================================================
    CLEAR ERRORS
    ========================================================= */
 
 function clearErrors() {
 
     document
-        .querySelectorAll(
-            ".profile-error"
-        )
-        .forEach(
-            (error) => {
+        .querySelectorAll(".profile-error")
+        .forEach((error) => {
 
-                error.textContent =
-                    "";
+            error.textContent = "";
 
-            }
+        });
+
+
+    const roleError =
+        document.querySelector(
+            ".profile-role-error"
         );
+
+
+    if (roleError) {
+        roleError.textContent = "";
+    }
 
 }
 
@@ -1286,6 +1505,19 @@ function initPageAnimation() {
             duration: 0.5,
             delay: 0.25,
             ease: "power3.out"
+        }
+    );
+
+
+    gsap.from(
+        ".profile-input",
+        {
+            opacity: 0,
+            y: 12,
+            duration: 0.45,
+            stagger: 0.035,
+            delay: 0.3,
+            ease: "power2.out"
         }
     );
 

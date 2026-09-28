@@ -582,40 +582,32 @@ function initNotifications() {
    LOGOUT
    ========================================================= */
 
-function initLogout() {
+if (logoutLink) {
 
-    const logout =
-        document.getElementById(
-            "logoutLink"
-        );
-
-
-    if (!logout) {
-
-        return;
-
-    }
-
-
-    logout.addEventListener(
+    logoutLink.addEventListener(
         "click",
-        (event) => {
+        event => {
 
             event.preventDefault();
 
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
 
-            sessionStorage.removeItem(
-                "smartInternLogin"
-            );
+            if (confirmLogout) {
 
+                window.location.href =
+                    "login.html";
 
-            window.location.href =
-                "login.html";
+            }
 
         }
     );
 
 }
+
+   
 /* =========================================
    SMARTINTERN DASHBOARD 3D
 ========================================= */
