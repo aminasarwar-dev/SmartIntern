@@ -825,3 +825,56 @@
     background: #29232b !important;
     color: #ffffff !important;
 }
+/* ==========================================================
+   LOGIN OPTIONS
+========================================================== */
+
+.login-options {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -4px 0 20px;
+    font-size: 13px;
+}
+
+
+/* Remember Me */
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #756a78;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.remember-me input {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #8d63ad;
+    cursor: pointer;
+}
+
+
+.remember-me span {
+    line-height: 1;
+}
+
+
+/* Forgot Password */
+
+.forgot-password {
+    color: #8d63ad;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .25s ease;
+}
+
+
+.forgot-password:hover {
+    color: #c982a7;
+}

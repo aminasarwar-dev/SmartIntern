@@ -1,8 +1,3 @@
-/* =========================================================
-   SMARTINTERN LOGIN
-   Three.js + GSAP + Form Validation
-   ========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
     initThreeScene();
@@ -15,22 +10,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initLoginForm();
 
+    initRememberMe();
+
+    initForgotPassword();
+
 });
 
 
+
 /* =========================================================
-   THREE.JS
-   ========================================================= */
+   THREE.JS LOGIN BACKGROUND
+========================================================= */
 
 function initThreeScene() {
 
     const canvas =
         document.getElementById("threeCanvas");
 
-    if (
-        !canvas ||
-        typeof THREE === "undefined"
-    ) {
+    if (!canvas || typeof THREE === "undefined") {
         return;
     }
 
@@ -42,33 +39,25 @@ function initThreeScene() {
     const camera =
         new THREE.PerspectiveCamera(
             45,
-            window.innerWidth /
-            window.innerHeight,
+            window.innerWidth / window.innerHeight,
             0.1,
-            100
+            1000
         );
 
 
-    camera.position.z = 6;
+    camera.position.z = 7;
 
 
     const renderer =
         new THREE.WebGLRenderer({
-
             canvas: canvas,
-
             alpha: true,
-
             antialias: true
-
         });
 
 
     renderer.setPixelRatio(
-        Math.min(
-            window.devicePixelRatio,
-            2
-        )
+        Math.min(window.devicePixelRatio, 2)
     );
 
 
@@ -78,25 +67,32 @@ function initThreeScene() {
     );
 
 
-    /* ================= OUTER CRYSTAL ================= */
+
+    /* =========================
+       MAIN CRYSTAL
+    ========================== */
 
     const geometry =
         new THREE.IcosahedronGeometry(
-            1.5,
+            1.45,
             1
         );
 
 
     const material =
-        new THREE.MeshBasicMaterial({
+        new THREE.MeshPhysicalMaterial({
 
             color: 0xb38bd7,
 
-            wireframe: true,
-
             transparent: true,
 
-            opacity: .13
+            opacity: 0.16,
+
+            roughness: 0.15,
+
+            metalness: 0.25,
+
+            transmission: 0.2
 
         });
 
@@ -111,65 +107,160 @@ function initThreeScene() {
     scene.add(crystal);
 
 
-    /* ================= INNER CRYSTAL ================= */
 
-    const innerGeometry =
+    /* =========================
+       WIREFRAME
+    ========================== */
+
+    const wireGeometry =
         new THREE.IcosahedronGeometry(
-            1,
+            1.52,
             1
         );
 
 
-    const innerMaterial =
+    const wireMaterial =
         new THREE.MeshBasicMaterial({
 
-            color: 0xe8a8c7,
+            color: 0xc982a7,
 
             wireframe: true,
 
             transparent: true,
 
-            opacity: .09
+            opacity: 0.24
 
         });
 
 
-    const innerCrystal =
+    const wire =
         new THREE.Mesh(
-            innerGeometry,
-            innerMaterial
+            wireGeometry,
+            wireMaterial
         );
 
 
-    scene.add(innerCrystal);
+    scene.add(wire);
 
 
-    /* ================= MOUSE ================= */
 
-    let mouseX = 0;
-    let mouseY = 0;
+    /* =========================
+       LIGHTS
+    ========================== */
 
-
-    window.addEventListener(
-        "pointermove",
-        (event) => {
-
-            mouseX =
-                (event.clientX /
-                    window.innerWidth -
-                    .5) * .25;
+    const ambientLight =
+        new THREE.AmbientLight(
+            0xffffff,
+            1.2
+        );
 
 
-            mouseY =
-                (event.clientY /
-                    window.innerHeight -
-                    .5) * .25;
+    scene.add(ambientLight);
 
-        }
+
+    const purpleLight =
+        new THREE.PointLight(
+            0xb38bd7,
+            2.2,
+            8
+        );
+
+
+    purpleLight.position.set(
+        3,
+        2,
+        4
     );
 
 
-    /* ================= ANIMATION ================= */
+    scene.add(purpleLight);
+
+
+    const pinkLight =
+        new THREE.PointLight(
+            0xe8a8c7,
+            1.8,
+            8
+        );
+
+
+    pinkLight.position.set(
+        -3,
+        -2,
+        3
+    );
+
+
+    scene.add(pinkLight);
+
+
+
+    /* =========================
+       PARTICLES
+    ========================== */
+
+    const particleGeometry =
+        new THREE.BufferGeometry();
+
+
+    const particleCount = 80;
+
+
+    const positions =
+        new Float32Array(
+            particleCount * 3
+        );
+
+
+    for (
+        let i = 0;
+        i < particleCount * 3;
+        i++
+    ) {
+
+        positions[i] =
+            (Math.random() - 0.5) * 12;
+
+    }
+
+
+    particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(
+            positions,
+            3
+        )
+    );
+
+
+    const particleMaterial =
+        new THREE.PointsMaterial({
+
+            color: 0xb38bd7,
+
+            size: 0.035,
+
+            transparent: true,
+
+            opacity: 0.45
+
+        });
+
+
+    const particles =
+        new THREE.Points(
+            particleGeometry,
+            particleMaterial
+        );
+
+
+    scene.add(particles);
+
+
+
+    /* =========================
+       ANIMATION
+    ========================== */
 
     function animate() {
 
@@ -178,12 +269,17 @@ function initThreeScene() {
         );
 
 
-        crystal.rotation.x += .0015;
-        crystal.rotation.y += .0025;
+        crystal.rotation.x += 0.002;
+
+        crystal.rotation.y += 0.004;
 
 
-        innerCrystal.rotation.x -= .001;
-        innerCrystal.rotation.y -= .0018;
+        wire.rotation.x -= 0.001;
+
+        wire.rotation.y -= 0.002;
+
+
+        particles.rotation.y += 0.0005;
 
 
         renderer.render(
@@ -197,7 +293,10 @@ function initThreeScene() {
     animate();
 
 
-    /* ================= RESIZE ================= */
+
+    /* =========================
+       RESIZE
+    ========================== */
 
     window.addEventListener(
         "resize",
@@ -222,26 +321,24 @@ function initThreeScene() {
 }
 
 
+
 /* =========================================================
-   GSAP
-   ========================================================= */
+   GSAP ANIMATIONS
+========================================================= */
 
 function initAnimations() {
 
-    if (
-        typeof gsap === "undefined"
-    ) {
+    if (typeof gsap === "undefined") {
         return;
     }
 
 
     gsap.from(
-        ".signup-card",
+        ".login-card",
         {
+            duration: 0.8,
             opacity: 0,
             y: 35,
-            scale: .97,
-            duration: .8,
             ease: "power3.out"
         }
     );
@@ -250,10 +347,10 @@ function initAnimations() {
     gsap.from(
         ".signup-heading h1",
         {
+            duration: 0.7,
             opacity: 0,
             y: 18,
-            duration: .7,
-            delay: .2,
+            delay: 0.15,
             ease: "power3.out"
         }
     );
@@ -262,10 +359,10 @@ function initAnimations() {
     gsap.from(
         ".role-switch",
         {
+            duration: 0.6,
             opacity: 0,
-            y: 15,
-            duration: .5,
-            delay: .3,
+            y: 12,
+            delay: 0.25,
             ease: "power3.out"
         }
     );
@@ -274,154 +371,140 @@ function initAnimations() {
     gsap.from(
         ".input-group",
         {
+            duration: 0.6,
             opacity: 0,
             y: 12,
-            duration: .45,
-            stagger: .08,
-            delay: .38,
+            delay: 0.3,
+            stagger: 0.08,
             ease: "power3.out"
-        }
-    );
-
-
-    gsap.from(
-        ".signup-button",
-        {
-            opacity: 0,
-            y: 12,
-            duration: .5,
-            delay: .58,
-            ease: "power3.out"
-        }
-    );
-
-
-    gsap.from(
-        ".login-text",
-        {
-            opacity: 0,
-            duration: .5,
-            delay: .68
         }
     );
 
 }
 
 
+
 /* =========================================================
-   STUDENT / COMPANY
-   ========================================================= */
+   ROLE SWITCH
+========================================================= */
 
 function initRoleSwitch() {
 
-    const buttons =
+    const roleButtons =
         document.querySelectorAll(
             ".role-option"
         );
 
 
-    const roleInput =
+    const accountRole =
         document.getElementById(
             "accountRole"
         );
 
 
-    buttons.forEach(
-        (button) => {
+    roleButtons.forEach(button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-                    const role =
-                        button.dataset.role;
-
-
-                    roleInput.value =
-                        role;
-
-
-                    buttons.forEach(
-                        (item) => {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
+                roleButtons.forEach(
+                    item => {
+                        item.classList.remove(
+                            "active"
+                        );
+                    }
+                );
 
 
-                    button.classList.add(
-                        "active"
-                    );
+                button.classList.add(
+                    "active"
+                );
 
-                }
-            );
 
-        }
-    );
+                const role =
+                    button.dataset.role;
+
+
+                accountRole.value =
+                    role;
+
+            }
+        );
+
+    });
 
 }
 
 
+
 /* =========================================================
-   PASSWORD SHOW / HIDE
-   ========================================================= */
+   PASSWORD TOGGLE
+========================================================= */
 
 function initPasswordToggle() {
 
-    const buttons =
+    const toggleButtons =
         document.querySelectorAll(
             ".password-toggle"
         );
 
 
-    buttons.forEach(
-        (button) => {
+    toggleButtons.forEach(button => {
 
-            button.addEventListener(
-                "click",
-                () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-                    const input =
-                        document.getElementById(
-                            button.dataset.target
-                        );
+                const targetId =
+                    button.dataset.target;
 
 
-                    if (
-                        input.type === "password"
-                    ) {
+                const input =
+                    document.getElementById(
+                        targetId
+                    );
 
-                        input.type = "text";
 
-                        button.textContent =
-                            "Hide";
+                if (!input) {
+                    return;
+                }
 
-                    }
-                    else {
 
-                        input.type =
-                            "password";
+                if (
+                    input.type === "password"
+                ) {
 
-                        button.textContent =
-                            "Show";
+                    input.type =
+                        "text";
 
-                    }
+                    button.textContent =
+                        "Hide";
 
                 }
-            );
 
-        }
-    );
+                else {
+
+                    input.type =
+                        "password";
+
+                    button.textContent =
+                        "Show";
+
+                }
+
+            }
+        );
+
+    });
 
 }
 
 
+
 /* =========================================================
    LOGIN FORM
-   ========================================================= */
+========================================================= */
 
 function initLoginForm() {
 
@@ -431,50 +514,66 @@ function initLoginForm() {
         );
 
 
+    if (!form) {
+        return;
+    }
+
+
     form.addEventListener(
         "submit",
-        (event) => {
+        async event => {
 
             event.preventDefault();
 
 
-            clearErrors();
+            clearLoginErrors();
 
 
             const email =
-                document.getElementById(
-                    "email"
-                ).value.trim();
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
 
 
             const password =
-                document.getElementById(
-                    "password"
-                ).value;
+                document
+                    .getElementById("password")
+                    .value;
 
 
             const role =
-                document.getElementById(
-                    "accountRole"
-                ).value;
+                document
+                    .getElementById("accountRole")
+                    .value;
 
 
             let valid = true;
 
 
-            /* EMAIL */
 
-            const emailRegex =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            /* =========================
+               EMAIL
+            ========================== */
 
+            if (!email) {
 
-            if (
-                !emailRegex.test(email)
+                showLoginError(
+                    "emailError",
+                    "Please enter your email."
+                );
+
+                valid = false;
+
+            }
+
+            else if (
+                !isValidEmail(email)
             ) {
 
-                showError(
-                    "email",
-                    "Please enter a valid email."
+                showLoginError(
+                    "emailError",
+                    "Please enter a valid email address."
                 );
 
                 valid = false;
@@ -482,14 +581,15 @@ function initLoginForm() {
             }
 
 
-            /* PASSWORD */
 
-            if (
-                password.length === 0
-            ) {
+            /* =========================
+               PASSWORD
+            ========================== */
 
-                showError(
-                    "password",
+            if (!password) {
+
+                showLoginError(
+                    "passwordError",
                     "Please enter your password."
                 );
 
@@ -503,26 +603,128 @@ function initLoginForm() {
             }
 
 
-            /* SAVE LOGIN */
 
-            const loginData = {
+            /* =========================
+               LOGIN REQUEST
+            ========================== */
 
-                role: role,
-
-                email: email
-
-            };
-
-
-            sessionStorage.setItem(
-                "smartInternLogin",
-                JSON.stringify(loginData)
-            );
+            const endpoint =
+                role === "company"
+                    ? "/company/login"
+                    : "/student/login";
 
 
-            /* SUCCESS */
+            try {
 
-            showSuccess(role);
+                const result =
+                    await apiJsonRequest(
+                        endpoint,
+                        {
+                            email: email,
+                            password: password
+                        }
+                    );
+
+
+
+                /* =========================
+                   SAVE LOGIN DATA
+                ========================== */
+
+                if (result.access_token) {
+
+                    sessionStorage.setItem(
+                        "access_token",
+                        result.access_token
+                    );
+
+                }
+
+
+                sessionStorage.setItem(
+                    "user_role",
+                    role
+                );
+
+
+                sessionStorage.setItem(
+                    "login_data",
+                    JSON.stringify(result)
+                );
+
+
+                if (result.user) {
+
+                    sessionStorage.setItem(
+                        "user_data",
+                        JSON.stringify(
+                            result.user
+                        )
+                    );
+
+                }
+
+
+                /* =========================
+                   REMEMBER ME
+                ========================== */
+
+                const rememberMe =
+                    document.getElementById(
+                        "rememberMe"
+                    );
+
+
+                if (
+                    rememberMe &&
+                    rememberMe.checked
+                ) {
+
+                    localStorage.setItem(
+                        "remember_email",
+                        email
+                    );
+
+                    localStorage.setItem(
+                        "remember_role",
+                        role
+                    );
+
+                }
+
+                else {
+
+                    localStorage.removeItem(
+                        "remember_email"
+                    );
+
+                    localStorage.removeItem(
+                        "remember_role"
+                    );
+
+                }
+
+
+
+                /* =========================
+                   SUCCESS
+                ========================== */
+
+                showLoginSuccess(
+                    role
+                );
+
+            }
+
+            catch (error) {
+
+                showLoginError(
+                    "passwordError",
+                    error.message ||
+                    "Invalid email or password."
+                );
+
+            }
 
         }
     );
@@ -530,107 +732,381 @@ function initLoginForm() {
 }
 
 
+
 /* =========================================================
-   ERROR
-   ========================================================= */
+   REMEMBER ME
+========================================================= */
 
-function showError(
-    field,
-    message
-) {
+function initRememberMe() {
 
-    const input =
+    const email =
         document.getElementById(
-            field
+            "email"
         );
 
 
-    if (input) {
-
-        input.classList.add(
-            "invalid"
+    const remember =
+        document.getElementById(
+            "rememberMe"
         );
+
+
+    if (!email || !remember) {
+        return;
+    }
+
+
+    const savedEmail =
+        localStorage.getItem(
+            "remember_email"
+        );
+
+
+    const savedRole =
+        localStorage.getItem(
+            "remember_role"
+        );
+
+
+    if (savedEmail) {
+
+        email.value =
+            savedEmail;
+
+        remember.checked =
+            true;
 
     }
 
 
-    const errorMap = {
+    if (savedRole) {
 
-        email:
-            "emailError",
-
-        password:
-            "passwordError"
-
-    };
+        const roleButton =
+            document.querySelector(
+                `.role-option[data-role="${savedRole}"]`
+            );
 
 
-    const error =
-        document.getElementById(
-            errorMap[field]
-        );
+        const accountRole =
+            document.getElementById(
+                "accountRole"
+            );
 
 
-    if (error) {
+        if (roleButton) {
 
-        error.textContent =
-            message;
+            document
+                .querySelectorAll(
+                    ".role-option"
+                )
+                .forEach(button => {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+            roleButton.classList.add(
+                "active"
+            );
+
+        }
+
+
+        if (accountRole) {
+
+            accountRole.value =
+                savedRole;
+
+        }
 
     }
 
 }
 
 
+
 /* =========================================================
-   CLEAR ERRORS
-   ========================================================= */
+   FORGOT PASSWORD MODAL
+========================================================= */
 
-function clearErrors() {
+function initForgotPassword() {
 
-    document
-        .querySelectorAll(
-            ".error"
-        )
-        .forEach(
-            (error) => {
-
-                error.textContent = "";
-
-            }
+    const link =
+        document.getElementById(
+            "forgotPasswordLink"
         );
 
 
-    document
-        .querySelectorAll(
-            ".input-group input"
-        )
-        .forEach(
-            (input) => {
+    const modal =
+        document.getElementById(
+            "forgotPasswordModal"
+        );
 
-                input.classList.remove(
-                    "invalid"
+
+    const closeButton =
+        document.getElementById(
+            "forgotModalClose"
+        );
+
+
+    const form =
+        document.getElementById(
+            "forgotPasswordForm"
+        );
+
+
+    if (
+        !link ||
+        !modal ||
+        !closeButton ||
+        !form
+    ) {
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       OPEN
+    ========================== */
+
+    link.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            clearForgotError();
+
+            const loginEmail =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            const forgotEmail =
+                document.getElementById(
+                    "forgotEmail"
                 );
 
+
+            if (
+                loginEmail &&
+                forgotEmail
+            ) {
+
+                forgotEmail.value =
+                    loginEmail;
+
             }
-        );
+
+
+            modal.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    if (forgotEmail) {
+                        forgotEmail.focus();
+                    }
+
+                },
+                100
+            );
+
+        }
+    );
+
+
+
+    /* =========================
+       CLOSE
+    ========================== */
+
+    closeButton.addEventListener(
+        "click",
+        () => {
+
+            closeForgotModal();
+
+        }
+    );
+
+
+
+    /* =========================
+       CLICK OUTSIDE
+    ========================== */
+
+    modal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target === modal
+            ) {
+
+                closeForgotModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================
+       ESCAPE
+    ========================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                modal.classList.contains(
+                    "show"
+                )
+            ) {
+
+                closeForgotModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================
+       FORM
+    ========================== */
+
+    form.addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            clearForgotError();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "forgotEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            if (!email) {
+
+                showForgotError(
+                    "Please enter your email."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !isValidEmail(email)
+            ) {
+
+                showForgotError(
+                    "Please enter a valid email address."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * IMPORTANT:
+             *
+             * Your backend routes supplied so far
+             * do NOT contain a password-reset endpoint.
+             *
+             * Therefore this frontend only validates
+             * the email here.
+             *
+             * When you give me the actual backend
+             * forgot-password endpoint, this submit
+             * section will call it.
+             */
+
+            console.log(
+                "Forgot password email:",
+                email
+            );
+
+        }
+    );
 
 }
 
 
+
 /* =========================================================
-   SUCCESS
-   ========================================================= */
+   CLOSE FORGOT MODAL
+========================================================= */
+
+function closeForgotModal() {
+
+    const modal =
+        document.getElementById(
+            "forgotPasswordModal"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove(
+        "show"
+    );
+
+}
+
+
 
 /* =========================================================
    SUCCESS
-   ========================================================= */
+========================================================= */
 
-function showSuccess(role) {
+function showLoginSuccess(role) {
 
     const overlay =
         document.getElementById(
             "successOverlay"
         );
+
+
+    if (!overlay) {
+
+        redirectToDashboard(
+            role
+        );
+
+        return;
+
+    }
 
 
     overlay.classList.add(
@@ -644,17 +1120,135 @@ function showSuccess(role) {
         );
 
 
-    continueButton.onclick = () => {
+    if (continueButton) {
 
-        sessionStorage.setItem(
-            "smartInternRole",
-            role
+        continueButton.onclick =
+            () => {
+
+                redirectToDashboard(
+                    role
+                );
+
+            };
+
+    }
+
+}
+
+
+
+/* =========================================================
+   REDIRECT
+========================================================= */
+
+function redirectToDashboard(role) {
+
+    if (role === "company") {
+
+        window.location.href =
+            "company-dashboard.html";
+
+    }
+
+    else {
+
+        window.location.href =
+            "student-dashboard.html";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+function showLoginError(
+    id,
+    message
+) {
+
+    const element =
+        document.getElementById(
+            id
         );
 
 
-        window.location.href =
-            "profile-setup.html";
+    if (element) {
 
-    };
+        element.textContent =
+            message;
+
+    }
+
+}
+
+
+function clearLoginErrors() {
+
+    const errors =
+        document.querySelectorAll(
+            "#loginForm .error"
+        );
+
+
+    errors.forEach(error => {
+
+        error.textContent =
+            "";
+
+    });
+
+}
+
+
+function showForgotError(message) {
+
+    const error =
+        document.getElementById(
+            "forgotEmailError"
+        );
+
+
+    if (error) {
+
+        error.textContent =
+            message;
+
+    }
+
+}
+
+
+function clearForgotError() {
+
+    const error =
+        document.getElementById(
+            "forgotEmailError"
+        );
+
+
+    if (error) {
+
+        error.textContent =
+            "";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   EMAIL VALIDATION
+========================================================= */
+
+function isValidEmail(email) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        email
+    );
 
 }

@@ -1,8 +1,13 @@
 /* =========================================================
    SMARTINTERN PROFILE SETUP
    Student + Company
+   Backend API Integrated
    ========================================================= */
 
+
+/* =========================================================
+   PAGE LOAD
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -63,7 +68,12 @@ function initRoleSwitch() {
 
                 companyFields.classList.add("hidden");
 
-                
+
+                if (subtitle) {
+                    subtitle.textContent =
+                        "Tell us a little about yourself.";
+                }
+
 
                 sessionStorage.setItem(
                     "smartInternRole",
@@ -79,7 +89,12 @@ function initRoleSwitch() {
 
                 studentFields.classList.add("hidden");
 
-                
+
+                if (subtitle) {
+                    subtitle.textContent =
+                        "Tell us a little about your company.";
+                }
+
 
                 sessionStorage.setItem(
                     "smartInternRole",
@@ -158,6 +173,7 @@ function updateGraduationFields() {
     const graduationStatus =
         document.getElementById("graduationStatus");
 
+
     if (!graduationStatus) {
         return;
     }
@@ -181,22 +197,27 @@ function updateGraduationFields() {
         semesterField.classList.add("hidden");
     }
 
+
     if (graduationYearField) {
         graduationYearField.classList.add("hidden");
     }
+
 
     if (graduationDateField) {
         graduationDateField.classList.add("hidden");
     }
 
 
-    /* Graduated */
+    /* =========================
+       GRADUATED
+    ========================= */
 
     if (status === "yes") {
 
         if (graduationYearField) {
             graduationYearField.classList.remove("hidden");
         }
+
 
         if (graduationDateField) {
             graduationDateField.classList.remove("hidden");
@@ -205,7 +226,9 @@ function updateGraduationFields() {
     }
 
 
-    /* Not Graduated */
+    /* =========================
+       NOT GRADUATED
+    ========================= */
 
     if (status === "no") {
 
@@ -243,6 +266,7 @@ function initProfessionalLinks() {
             linksFields.classList.remove("hidden");
 
         }
+
         else {
 
             linksFields.classList.add("hidden");
@@ -282,16 +306,21 @@ function initFileInputs() {
             if (file) {
 
                 if (resumeName) {
+
                     resumeName.textContent =
                         file.name;
+
                 }
 
             }
+
             else {
 
                 if (resumeName) {
+
                     resumeName.textContent =
                         "No file selected";
+
                 }
 
             }
@@ -327,16 +356,21 @@ function initFileInputs() {
             if (file) {
 
                 if (tradeLicenseName) {
+
                     tradeLicenseName.textContent =
                         file.name;
+
                 }
 
             }
+
             else {
 
                 if (tradeLicenseName) {
+
                     tradeLicenseName.textContent =
                         "No file selected";
+
                 }
 
             }
@@ -363,7 +397,7 @@ function initProfileForm() {
     }
 
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
 
         event.preventDefault();
 
@@ -378,13 +412,13 @@ function initProfileForm() {
 
         if (role === "student") {
 
-            handleStudentSubmit();
+            await handleStudentSubmit();
 
         }
 
         else if (role === "company") {
 
-            handleCompanySubmit();
+            await handleCompanySubmit();
 
         }
 
@@ -427,7 +461,7 @@ function getActiveRole() {
    STUDENT SUBMIT
    ========================================================= */
 
-function handleStudentSubmit() {
+async function handleStudentSubmit() {
 
     let valid = true;
 
@@ -507,6 +541,7 @@ function handleStudentSubmit() {
         valid = false;
 
     }
+
     else if (!isValidEmail(email)) {
 
         showError(
@@ -701,12 +736,17 @@ function handleStudentSubmit() {
         valid = false;
 
     }
+
     else {
 
         const allowedResumeTypes = [
+
             "application/pdf",
+
             "application/msword",
+
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
         ];
 
 
@@ -767,99 +807,189 @@ function handleStudentSubmit() {
         getValue("portfolio");
 
 
-    /* =========================
-       STUDENT PROFILE
-    ========================= */
+    /* =====================================================
+       CREATE FORM DATA FOR FASTAPI
+       Backend: POST /student/signup
+       ===================================================== */
 
-    const studentProfile = {
+    const formData =
+        new FormData();
 
-        role: "student",
 
-        name: name,
+    formData.append(
+        "name",
+        name
+    );
 
-        fullName: name,
 
-        email: email,
+    formData.append(
+        "email",
+        email
+    );
 
-        password: password,
 
-        phone: phone,
+    formData.append(
+        "password",
+        password
+    );
 
-        university: university,
 
-        degree: degree,
+    formData.append(
+        "phone",
+        phone
+    );
 
-        graduationStatus:
-            graduationStatus,
 
-        semester:
-            graduationStatus === "no"
-                ? semester
-                : "",
+    formData.append(
+        "university",
+        university
+    );
 
-        currentSemester:
-            graduationStatus === "no"
-                ? semester
-                : "",
 
-        graduationYear:
-            graduationStatus === "yes"
-                ? graduationYear
-                : "",
+    formData.append(
+        "degree",
+        degree
+    );
 
-        graduationDate:
-            graduationStatus === "yes"
-                ? graduationDate
-                : "",
 
-        skills: skills,
+    formData.append(
+        "graduation_status",
+        graduationStatus
+    );
 
-        location: location,
 
-        linkedin: linkedin,
+    formData.append(
+        "semester",
+        graduationStatus === "no"
+            ? semester
+            : ""
+    );
 
-        github: github,
 
-        portfolio: portfolio,
+    formData.append(
+        "graduation_year",
+        graduationStatus === "yes"
+            ? graduationYear
+            : ""
+    );
 
-        resume: {
 
-            name:
-                resumeFile.name,
+    formData.append(
+        "graduation_date",
+        graduationStatus === "yes"
+            ? graduationDate
+            : ""
+    );
 
-            type:
-                resumeFile.type,
 
-            size:
-                resumeFile.size
+    formData.append(
+        "skills",
+        skills
+    );
+
+
+    formData.append(
+        "location",
+        location
+    );
+
+
+    formData.append(
+        "linkedin",
+        linkedin
+    );
+
+
+    formData.append(
+        "github",
+        github
+    );
+
+
+    formData.append(
+        "portfolio",
+        portfolio
+    );
+
+
+    if (resumeFile) {
+
+        formData.append(
+            "resume",
+            resumeFile
+        );
+
+    }
+
+
+    /* =====================================================
+       SEND STUDENT SIGNUP REQUEST
+       ===================================================== */
+
+    try {
+
+        const result =
+            await apiFormRequest(
+                "/student/signup",
+                formData
+            );
+
+
+        /* =========================
+           SAVE TOKEN
+        ========================= */
+
+        if (result.access_token) {
+
+            sessionStorage.setItem(
+                "smartInternToken",
+                result.access_token
+            );
 
         }
 
-    };
+
+        /* =========================
+           SAVE ROLE
+        ========================= */
+
+        sessionStorage.setItem(
+            "smartInternRole",
+            "student"
+        );
 
 
-    /* =========================
-       SAVE
-    ========================= */
+        /* =========================
+           SAVE BACKEND STUDENT
+        ========================= */
 
-    sessionStorage.setItem(
-        "smartInternStudentProfile",
-        JSON.stringify(studentProfile)
-    );
+        if (result.student) {
 
+            sessionStorage.setItem(
+                "smartInternStudentProfile",
+                JSON.stringify(result.student)
+            );
 
-    sessionStorage.setItem(
-        "smartInternRole",
-        "student"
-    );
+        }
 
 
-    /* =========================
-       GO TO DASHBOARD
-    ========================= */
+        /* =========================
+           GO TO DASHBOARD
+        ========================= */
 
-    window.location.href =
-        "student-dashboard.html";
+        window.location.href =
+            "student-dashboard.html";
+
+    }
+
+    catch (error) {
+
+        showRoleError(
+            error.message ||
+            "Unable to create your account. Please try again."
+        );
+
+    }
 
 }
 
@@ -868,7 +998,7 @@ function handleStudentSubmit() {
    COMPANY SUBMIT
    ========================================================= */
 
-function handleCompanySubmit() {
+async function handleCompanySubmit() {
 
     let valid = true;
 
@@ -948,6 +1078,7 @@ function handleCompanySubmit() {
         valid = false;
 
     }
+
     else if (!isValidEmail(email)) {
 
         showError(
@@ -1054,6 +1185,7 @@ function handleCompanySubmit() {
         valid = false;
 
     }
+
     else if (!isValidWebsite(companyWebsite)) {
 
         showError(
@@ -1100,12 +1232,17 @@ function handleCompanySubmit() {
         valid = false;
 
     }
+
     else {
 
         const allowedTradeTypes = [
+
             "application/pdf",
+
             "image/jpeg",
+
             "image/png"
+
         ];
 
 
@@ -1214,85 +1351,159 @@ function handleCompanySubmit() {
     }
 
 
-    /* =========================
-       COMPANY PROFILE
-    ========================= */
+    /* =====================================================
+       CREATE FORM DATA FOR FASTAPI
+       Backend: POST /company/signup
+       ===================================================== */
 
-    const companyProfile = {
-
-        role: "company",
-
-        companyName:
-            companyName,
-
-        email:
-            email,
-
-        password:
-            password,
-
-        industry:
-            industry,
-
-        contactPerson:
-            contactPerson,
-
-        phone:
-            companyPhone,
-
-        location:
-            companyLocation,
-
-        website:
-            companyWebsite,
-
-        description:
-            companyDescription,
-
-        tradeLicenseDocument: {
-
-            name:
-                tradeFile.name,
-
-            type:
-                tradeFile.type,
-
-            size:
-                tradeFile.size
-
-        },
-
-        licenseIssueDate:
-            licenseIssueDate,
-
-        licenseExpiryDate:
-            licenseExpiryDate
-
-    };
+    const formData =
+        new FormData();
 
 
-    /* =========================
-       SAVE
-    ========================= */
-
-    sessionStorage.setItem(
-        "smartInternCompanyProfile",
-        JSON.stringify(companyProfile)
+    formData.append(
+        "company_name",
+        companyName
     );
 
 
-    sessionStorage.setItem(
-        "smartInternRole",
-        "company"
+    formData.append(
+        "email",
+        email
     );
 
 
-    /* =========================
-       GO TO DASHBOARD
-    ========================= */
+    formData.append(
+        "password",
+        password
+    );
 
-    window.location.href =
-        "company-dashboard.html";
+
+    formData.append(
+        "industry",
+        industry
+    );
+
+
+    formData.append(
+        "contact_person",
+        contactPerson
+    );
+
+
+    formData.append(
+        "phone",
+        companyPhone
+    );
+
+
+    formData.append(
+        "location",
+        companyLocation
+    );
+
+
+    formData.append(
+        "website",
+        companyWebsite
+    );
+
+
+    formData.append(
+        "description",
+        companyDescription
+    );
+
+
+    formData.append(
+        "license_issue_date",
+        licenseIssueDate
+    );
+
+
+    formData.append(
+        "license_expiry_date",
+        licenseExpiryDate
+    );
+
+
+    if (tradeFile) {
+
+        formData.append(
+            "trade_license",
+            tradeFile
+        );
+
+    }
+
+
+    /* =====================================================
+       SEND COMPANY SIGNUP REQUEST
+       ===================================================== */
+
+    try {
+
+        const result =
+            await apiFormRequest(
+                "/company/signup",
+                formData
+            );
+
+
+        /* =========================
+           SAVE TOKEN
+        ========================= */
+
+        if (result.access_token) {
+
+            sessionStorage.setItem(
+                "smartInternToken",
+                result.access_token
+            );
+
+        }
+
+
+        /* =========================
+           SAVE ROLE
+        ========================= */
+
+        sessionStorage.setItem(
+            "smartInternRole",
+            "company"
+        );
+
+
+        /* =========================
+           SAVE BACKEND COMPANY
+        ========================= */
+
+        if (result.company) {
+
+            sessionStorage.setItem(
+                "smartInternCompanyProfile",
+                JSON.stringify(result.company)
+            );
+
+        }
+
+
+        /* =========================
+           GO TO DASHBOARD
+        ========================= */
+
+        window.location.href =
+            "company-dashboard.html";
+
+    }
+
+    catch (error) {
+
+        showRoleError(
+            error.message ||
+            "Unable to create your company account. Please try again."
+        );
+
+    }
 
 }
 
@@ -1336,7 +1547,8 @@ function isValidEmail(email) {
 
 function isValidWebsite(website) {
 
-    let value = website.trim();
+    let value =
+        website.trim();
 
 
     if (
@@ -1357,6 +1569,7 @@ function isValidWebsite(website) {
         return true;
 
     }
+
     catch {
 
         return false;
@@ -1408,6 +1621,7 @@ function showRoleError(message) {
         error =
             document.createElement("span");
 
+
         error.className =
             "profile-role-error";
 
@@ -1419,7 +1633,9 @@ function showRoleError(message) {
 
 
         if (role) {
+
             role.appendChild(error);
+
         }
 
     }
@@ -1453,7 +1669,9 @@ function clearErrors() {
 
 
     if (roleError) {
+
         roleError.textContent = "";
+
     }
 
 }
@@ -1469,7 +1687,9 @@ function initPageAnimation() {
         typeof gsap ===
         "undefined"
     ) {
+
         return;
+
     }
 
 

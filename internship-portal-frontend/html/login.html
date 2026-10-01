@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SmartIntern — Login</title>
 
-    <!-- Fonts -->
+    <!-- =========================
+         GOOGLE FONTS
+    ========================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -15,42 +20,431 @@
         rel="stylesheet"
     >
 
-    <!-- Existing CSS -->
+    <!-- =========================
+         CSS
+    ========================== -->
+
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/auth.css">
+
+    <!-- Keep this if you already have it -->
     <link rel="stylesheet" href="../css/autofill-fix.css">
+
+    <style>
+
+        /* =====================================================
+           LOGIN OPTIONS
+        ===================================================== */
+
+        .login-options {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin: -3px 0 20px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+
+        }
+
+
+        .remember-me {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #756a78;
+
+            cursor: pointer;
+
+            user-select: none;
+
+        }
+
+
+        .remember-me input {
+
+            width: 15px;
+
+            height: 15px;
+
+            margin: 0;
+
+            accent-color: #8d63ad;
+
+            cursor: pointer;
+
+        }
+
+
+        .forgot-password {
+
+            color: #8d63ad;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: color .2s ease;
+
+        }
+
+
+        .forgot-password:hover {
+
+            color: #c982a7;
+
+        }
+
+
+
+        /* =====================================================
+           FORGOT PASSWORD MODAL
+        ===================================================== */
+
+        .forgot-modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 1000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(41, 35, 43, 0.18);
+
+            backdrop-filter: blur(5px);
+
+            -webkit-backdrop-filter: blur(5px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease;
+
+        }
+
+
+        .forgot-modal.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+
+        }
+
+
+        /* Small — approximately login card size */
+
+        .forgot-modal-box {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 430px;
+
+            box-sizing: border-box;
+
+            padding: 34px;
+
+            background: #ffffff;
+
+            border: 1px solid #eee5ed;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 20px 55px rgba(41, 35, 43, 0.15);
+
+            transform: translateY(12px);
+
+            transition: transform .25s ease;
+
+        }
+
+
+        .forgot-modal.show .forgot-modal-box {
+
+            transform: translateY(0);
+
+        }
+
+
+        /* Close */
+
+        .forgot-modal-close {
+
+            position: absolute;
+
+            top: 13px;
+
+            right: 14px;
+
+            width: 30px;
+
+            height: 30px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f8f3f8;
+
+            color: #756a78;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 20px;
+
+            line-height: 1;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: .2s ease;
+
+        }
+
+
+        .forgot-modal-close:hover {
+
+            background: #eee4f6;
+
+            color: #29232b;
+
+        }
+
+
+        /* Heading */
+
+        .forgot-modal-heading {
+
+            text-align: center;
+
+            margin-bottom: 23px;
+
+        }
+
+
+        .forgot-modal-heading h2 {
+
+            margin: 0;
+
+            color: #29232b;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 29px;
+
+            line-height: 1.2;
+
+            font-weight: 500;
+
+        }
+
+
+        .forgot-modal-heading h2 em {
+
+            color: #8d63ad;
+
+            font-style: italic;
+
+        }
+
+
+        .forgot-modal-heading p {
+
+            margin: 9px 0 0;
+
+            color: #756a78;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 13px;
+
+            line-height: 1.55;
+
+        }
+
+
+        /* Modal input */
+
+        .forgot-modal .input-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .forgot-modal .input-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #29232b;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+        }
+
+
+        .forgot-modal .input-group input {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .forgot-modal .error {
+
+            display: block;
+
+            min-height: 16px;
+
+            margin-top: 5px;
+
+            color: #c982a7;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            font-size: 11px;
+
+        }
+
+
+        /* Same button as login */
+
+        .forgot-modal .signup-button {
+
+            width: 100%;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 500px) {
+
+            .forgot-modal-box {
+
+                max-width: 100%;
+
+                padding: 30px 24px 25px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .forgot-modal-heading h2 {
+
+                font-size: 26px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body class="login-page">
 
-    <!-- Soft Background -->
+
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
     <div class="signup-bg bg-one"></div>
+
     <div class="signup-bg bg-two"></div>
 
-    <!-- Subtle 3D -->
+
+    <!-- =========================
+         THREE.JS
+    ========================== -->
+
     <canvas id="threeCanvas"></canvas>
 
 
-    <!-- ================= LOGIN ================= -->
+    <!-- =========================
+         LOGIN
+    ========================== -->
 
     <main class="signup-wrapper">
 
         <section class="signup-card login-card">
+
 
             <!-- Heading -->
 
             <div class="signup-heading">
 
                 <h1>
+
                     Welcome
-                    <em>back.</em>
+
+                    <em>
+                        back.
+                    </em>
+
                 </h1>
 
             </div>
 
 
-            <!-- ================= ROLE ================= -->
+            <!-- Role -->
 
             <div class="role-switch">
 
@@ -61,6 +455,7 @@
                 >
                     Student
                 </button>
+
 
                 <button
                     type="button"
@@ -73,9 +468,12 @@
             </div>
 
 
-            <!-- ================= FORM ================= -->
+            <!-- Login Form -->
 
-            <form id="loginForm" novalidate>
+            <form
+                id="loginForm"
+                novalidate
+            >
 
                 <input
                     type="hidden"
@@ -142,6 +540,35 @@
                 </div>
 
 
+                <!-- Remember / Forgot -->
+
+                <div class="login-options">
+
+                    <label class="remember-me">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <a
+                        href="#"
+                        class="forgot-password"
+                        id="forgotPasswordLink"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
                 <!-- Login Button -->
 
                 <button
@@ -160,7 +587,7 @@
                 </button>
 
 
-                <!-- Signup -->
+                <!-- Create Account -->
 
                 <p class="login-text">
 
@@ -179,7 +606,10 @@
     </main>
 
 
-    <!-- ================= SUCCESS ================= -->
+
+    <!-- =========================
+         SUCCESS OVERLAY
+    ========================== -->
 
     <div
         class="success-overlay"
@@ -220,14 +650,109 @@
     </div>
 
 
-    <!-- Three.js -->
+
+    <!-- =========================
+         FORGOT PASSWORD MODAL
+    ========================== -->
+
+    <div
+        class="forgot-modal"
+        id="forgotPasswordModal"
+    >
+
+        <div class="forgot-modal-box">
+
+
+            <button
+                type="button"
+                class="forgot-modal-close"
+                id="forgotModalClose"
+            >
+                ×
+            </button>
+
+
+            <div class="forgot-modal-heading">
+
+                <h2>
+                    Forgot
+                    <em>password?</em>
+                </h2>
+
+                <p>
+                    Enter your registered email address.
+                </p>
+
+            </div>
+
+
+            <form
+                id="forgotPasswordForm"
+                novalidate
+            >
+
+                <div class="input-group">
+
+                    <label for="forgotEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="forgotEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                    >
+
+                    <span
+                        class="error"
+                        id="forgotEmailError"
+                    ></span>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="signup-button"
+                >
+
+                    <span>
+                        Continue
+                    </span>
+
+                    <span class="button-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         LIBRARIES
+    ========================== -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-    <!-- Login JS -->
+
+    <!-- =========================
+         YOUR JS
+    ========================== -->
+
+    <script src="../js/api.js"></script>
+
     <script src="../js/login.js"></script>
 
+
 </body>
+
 </html>

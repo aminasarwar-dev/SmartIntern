@@ -1,45 +1,1087 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Internship | SmartIntern</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/landing.css">
-</head>
-<body>
-    <header class="navbar">
-        <a href="index.html" class="logo">
-            <div class="logo-mark"><span></span><span></span><span></span></div>
-            <div class="logo-text"><strong>Smart</strong>Intern</div>
-        </a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="login.html">Login</a>
-        </nav>
-        <div class="nav-buttons">
-            <a href="login.html" class="login-btn">Login</a>
-            <a href="signup.html" class="signup-btn">Get Started →</a>
-        </div>
-        <button class="menu-btn">☰</button>
-    </header>
 
-    <main style="min-height:100vh;padding:180px 7% 100px;">
-        <div class="section-label">SMARTINTERN</div>
-        <h1 style="font-family:'Playfair Display',serif;font-size:clamp(48px,7vw,90px);line-height:1;">
-            Post Internship
-        </h1>
-        <p style="max-width:650px;margin-top:25px;color:#777078;line-height:1.8;">
-            This page is reserved for the next SmartIntern module. It will use the same
-            light purple, pink, cream and dark-plum visual system as the supplied landing page.
-        </p>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SmartIntern — Post Internship</title>
+
+
+    <!-- =====================================================
+         FONTS — SAME AS COMPANY DASHBOARD
+         ===================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         COMMON CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/variables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
+
+    <!-- SAME COMPANY DASHBOARD CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/company-dashboard.css"
+    >
+
+    <!-- PAGE CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/post-internship.css"
+    >
+
+</head>
+
+
+<body class="company-dashboard-page company-post-page">
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+         ===================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+         EXACT SAME AS COMPANY DASHBOARD
+         ===================================================== -->
+
+    <aside
+        class="dashboard-sidebar"
+        id="dashboardSidebar"
+    >
+
+
+        <!-- BRAND -->
+
+        <div class="sidebar-brand">
+
+            <a href="index.html">
+                Smart<span>Intern</span>
+            </a>
+
+        </div>
+
+
+        <!-- COMPANY PROFILE -->
+
+        <div class="sidebar-profile">
+
+            <div
+                class="sidebar-avatar"
+                id="sidebarCompanyAvatar"
+            >
+                TN
+            </div>
+
+            <div class="sidebar-profile-info">
+
+                <strong id="sidebarCompanyName">
+                    Company
+                </strong>
+
+                <span>
+                    Company
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <p class="nav-label">
+                MAIN
+            </p>
+
+
+            <a
+                href="company-dashboard.html"
+                class="sidebar-link"
+            >
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="post-internship.html"
+                class="sidebar-link active"
+            >
+
+                <span class="nav-icon">
+                    ＋
+                </span>
+
+                <span>
+                    Post Internship
+                </span>
+
+            </a>
+
+
+            <a
+                href="manage-internships.html"
+                class="sidebar-link"
+            >
+
+                <span class="nav-icon">
+                    ▣
+                </span>
+
+                <span>
+                    Manage Internships
+                </span>
+
+            </a>
+
+
+            <a
+                href="view-applicants.html"
+                class="sidebar-link"
+            >
+
+                <span class="nav-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Applicants
+                </span>
+
+            </a>
+
+
+            <p class="nav-label nav-label-space">
+                AI TOOLS
+            </p>
+
+
+            <a
+                href="ai-candidate-matches.html"
+                class="sidebar-link"
+            >
+
+                <span class="nav-icon">
+                    ✦
+                </span>
+
+                <span>
+                    AI Candidate Matches
+                </span>
+
+            </a>
+
+
+            <a
+                href="hiring-analytics.html"
+                class="sidebar-link"
+            >
+
+                <span class="nav-icon">
+                    ◎
+                </span>
+
+                <span>
+                    Hiring Analytics
+                </span>
+
+            </a>
+
+
+            <p class="nav-label nav-label-space">
+                ACCOUNT
+            </p>
+
+
+            <a
+                href="company-profile.html"
+                class="sidebar-link"
+            >
+
+                <span class="nav-icon">
+                    ◯
+                </span>
+
+                <span>
+                    Company Profile
+                </span>
+
+            </a>
+
+
+            <a
+                href="login.html"
+                class="sidebar-link"
+                id="logoutLink"
+            >
+
+                <span class="nav-icon">
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN AREA
+         ===================================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- =================================================
+             TOP BAR
+             EXACT SAME AS COMPANY DASHBOARD
+             ================================================= -->
+
+        <header class="dashboard-topbar">
+
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                type="button"
+            >
+                ☰
+            </button>
+
+
+            <div class="topbar-title">
+
+                <span>
+                    Company Portal
+                </span>
+
+                <h1>
+                    Post Internship
+                </h1>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <!-- Notification -->
+
+                <button
+                    class="notification-button"
+                    id="notificationButton"
+                    type="button"
+                >
+
+                    ♧
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <!-- Profile -->
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="topbar-avatar"
+                        id="topbarCompanyAvatar"
+                    >
+                        TN
+                    </div>
+
+
+                    <div class="topbar-profile-text">
+
+                        <strong id="topbarCompanyName">
+                            Company
+                        </strong>
+
+                        <span>
+                            Company
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+             ================================================= -->
+
+        <div class="dashboard-content post-content">
+
+
+            <!-- =================================================
+                 HERO
+                 ================================================= -->
+
+            <section class="post-hero">
+
+
+                <div class="post-hero-copy">
+
+                    <span class="post-eyebrow">
+                        YOUR HIRING JOURNEY
+                    </span>
+
+
+                    <h2>
+                        Find your next
+                        <em>great intern.</em>
+                    </h2>
+
+
+                    <p>
+                        Create an internship opportunity and connect
+                        with students whose skills match your company's
+                        requirements.
+                    </p>
+
+
+                    <div class="post-hero-points">
+
+                        <div class="hero-point">
+                            <span>✦</span>
+                            <div>
+                                <strong>Reach talented students</strong>
+                                <small>Show your opportunity to relevant candidates.</small>
+                            </div>
+                        </div>
+
+
+                        <div class="hero-point">
+                            <span>◇</span>
+                            <div>
+                                <strong>AI-powered matching</strong>
+                                <small>SmartIntern can match candidates with your requirements.</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO VISUAL -->
+
+                <div class="post-hero-visual">
+
+                    <div class="hero-orbit hero-orbit-one"></div>
+
+                    <div class="hero-orbit hero-orbit-two"></div>
+
+                    <div class="hero-glow"></div>
+
+
+                    <div class="hero-job-card">
+
+                        <span>
+                            NEW OPPORTUNITY
+                        </span>
+
+                        <div class="hero-job-icon">
+                            ✦
+                        </div>
+
+                        <strong>
+                            Build your next team.
+                        </strong>
+
+                        <small>
+                            Post an internship today
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FORM SECTION
+                 ================================================= -->
+
+            <section class="post-form-section">
+
+
+                <div class="post-section-heading">
+
+                    <div>
+
+                        <span>
+                            INTERNSHIP DETAILS
+                        </span>
+
+                        <h2>
+                            Create an
+                            <em>opportunity.</em>
+                        </h2>
+
+                        <p>
+                            Add the details students need to understand
+                            the role and apply confidently.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    class="internship-form"
+                    id="internshipForm"
+                    novalidate
+                >
+
+
+                    <!-- BASIC INFORMATION -->
+
+                    <div class="form-card">
+
+
+                        <div class="form-card-heading">
+
+                            <div class="form-card-icon">
+                                ✦
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    BASIC INFORMATION
+                                </span>
+
+                                <h3>
+                                    Tell students about the role
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- TITLE -->
+
+                            <div class="form-group full">
+
+                                <label for="internshipTitle">
+                                    Internship Title
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="internshipTitle"
+                                    name="title"
+                                    placeholder="e.g. Python Developer Intern"
+                                    required
+                                >
+
+                                <small
+                                    class="field-error"
+                                    id="titleError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- CATEGORY -->
+
+                            <div class="form-group">
+
+                                <label for="category">
+                                    Category
+                                    <span>*</span>
+                                </label>
+
+                                <select
+                                    id="category"
+                                    name="category"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select category
+                                    </option>
+
+                                    <option value="software-development">
+                                        Software Development
+                                    </option>
+
+                                    <option value="web-development">
+                                        Web Development
+                                    </option>
+
+                                    <option value="data-science">
+                                        Data Science
+                                    </option>
+
+                                    <option value="artificial-intelligence">
+                                        Artificial Intelligence
+                                    </option>
+
+                                    <option value="ui-ux">
+                                        UI / UX Design
+                                    </option>
+
+                                    <option value="cyber-security">
+                                        Cyber Security
+                                    </option>
+
+                                    <option value="marketing">
+                                        Marketing
+                                    </option>
+
+                                    <option value="other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                                <small
+                                    class="field-error"
+                                    id="categoryError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- WORK TYPE -->
+
+                            <div class="form-group">
+
+                                <label for="workType">
+                                    Work Type
+                                    <span>*</span>
+                                </label>
+
+                                <select
+                                    id="workType"
+                                    name="work_type"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select work type
+                                    </option>
+
+                                    <option value="remote">
+                                        Remote
+                                    </option>
+
+                                    <option value="hybrid">
+                                        Hybrid
+                                    </option>
+
+                                    <option value="onsite">
+                                        Onsite
+                                    </option>
+
+                                </select>
+
+                                <small
+                                    class="field-error"
+                                    id="workTypeError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- LOCATION -->
+
+                            <div class="form-group">
+
+                                <label for="location">
+                                    Location
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="location"
+                                    name="location"
+                                    placeholder="e.g. Islamabad, Pakistan"
+                                >
+
+                            </div>
+
+
+                            <!-- DURATION -->
+
+                            <div class="form-group">
+
+                                <label for="duration">
+                                    Duration
+                                    <span>*</span>
+                                </label>
+
+                                <select
+                                    id="duration"
+                                    name="duration"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select duration
+                                    </option>
+
+                                    <option value="1-month">
+                                        1 Month
+                                    </option>
+
+                                    <option value="2-months">
+                                        2 Months
+                                    </option>
+
+                                    <option value="3-months">
+                                        3 Months
+                                    </option>
+
+                                    <option value="6-months">
+                                        6 Months
+                                    </option>
+
+                                    <option value="12-months">
+                                        12 Months
+                                    </option>
+
+                                </select>
+
+                                <small
+                                    class="field-error"
+                                    id="durationError"
+                                ></small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- COMPENSATION & DEADLINE -->
+
+                    <div class="form-card">
+
+
+                        <div class="form-card-heading">
+
+                            <div class="form-card-icon pink">
+                                ◇
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    OPPORTUNITY DETAILS
+                                </span>
+
+                                <h3>
+                                    Set the internship terms
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- STIPEND -->
+
+                            <div class="form-group">
+
+                                <label for="stipend">
+                                    Stipend
+                                </label>
+
+                                <div class="input-with-prefix">
+
+                                    <span>
+                                        PKR
+                                    </span>
+
+                                    <input
+                                        type="number"
+                                        id="stipend"
+                                        name="stipend"
+                                        placeholder="e.g. 25000"
+                                        min="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DEADLINE -->
+
+                            <div class="form-group">
+
+                                <label for="applicationDeadline">
+                                    Application Deadline
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="applicationDeadline"
+                                    name="application_deadline"
+                                    required
+                                >
+
+                                <small
+                                    class="field-error"
+                                    id="deadlineError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- SKILLS -->
+
+                            <div class="form-group full">
+
+                                <label for="skills">
+                                    Required Skills
+                                    <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="skills"
+                                    name="skills"
+                                    placeholder="e.g. Python, SQL, Git, REST APIs"
+                                    required
+                                >
+
+                                <small class="input-hint">
+                                    Separate skills with commas.
+                                </small>
+
+                                <small
+                                    class="field-error"
+                                    id="skillsError"
+                                ></small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-card">
+
+
+                        <div class="form-card-heading">
+
+                            <div class="form-card-icon plum">
+                                ◈
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    ROLE DESCRIPTION
+                                </span>
+
+                                <h3>
+                                    Describe the opportunity
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- DESCRIPTION -->
+
+                            <div class="form-group full">
+
+                                <label for="description">
+                                    Internship Description
+                                    <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="description"
+                                    name="description"
+                                    rows="6"
+                                    placeholder="Describe the role, responsibilities and what the intern will work on..."
+                                    required
+                                ></textarea>
+
+                                <small
+                                    class="field-error"
+                                    id="descriptionError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- REQUIREMENTS -->
+
+                            <div class="form-group full">
+
+                                <label for="requirements">
+                                    Requirements
+                                    <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="requirements"
+                                    name="requirements"
+                                    rows="5"
+                                    placeholder="Mention education, experience, technical skills or other requirements..."
+                                    required
+                                ></textarea>
+
+                                <small
+                                    class="field-error"
+                                    id="requirementsError"
+                                ></small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FORM ACTIONS -->
+
+                    <div class="form-actions">
+
+
+                        <a
+                            href="company-dashboard.html"
+                            class="cancel-button"
+                        >
+                            Cancel
+                        </a>
+
+
+                        <button
+                            type="submit"
+                            class="publish-button"
+                        >
+
+                            <span>
+                                Publish Internship
+                            </span>
+
+                            <strong>
+                                →
+                            </strong>
+
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        class="form-success"
+                        id="formSuccess"
+                    >
+                        Internship details are ready to publish.
+                    </p>
+
+
+                </form>
+
+            </section>
+
+
+        </div>
+
     </main>
 
-    <script src="../js/nav.js"></script>
+
+    <!-- =====================================================
+         NOTIFICATION PANEL
+         SAME AS COMPANY DASHBOARD
+         ===================================================== -->
+
+    <div
+        class="notification-panel"
+        id="notificationPanel"
+    >
+
+
+        <div class="notification-panel-head">
+
+            <h3>
+                Notifications
+            </h3>
+
+            <button
+                id="closeNotifications"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="panel-notification">
+
+            <div>
+                ✦
+            </div>
+
+            <section>
+
+                <strong>
+                    New Applicant
+                </strong>
+
+                <p>
+                    A new candidate applied for your internship.
+                </p>
+
+            </section>
+
+        </div>
+
+
+        <div class="panel-notification">
+
+            <div>
+                ✓
+            </div>
+
+            <section>
+
+                <strong>
+                    Candidate Shortlisted
+                </strong>
+
+                <p>
+                    A candidate has been shortlisted.
+                </p>
+
+            </section>
+
+        </div>
+
+
+        <div class="panel-notification">
+
+            <div>
+                ◷
+            </div>
+
+            <section>
+
+                <strong>
+                    Interview Reminder
+                </strong>
+
+                <p>
+                    You have an interview scheduled tomorrow.
+                </p>
+
+            </section>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         THREE.JS
+         ===================================================== -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+    ></script>
+
+
+    <!-- =====================================================
+         GSAP
+         ===================================================== -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    ></script>
+
+
+    <!-- =====================================================
+         PAGE JS
+         ===================================================== -->
+
+    <script src="../js/post-internship.js"></script>
+
+
 </body>
+
 </html>

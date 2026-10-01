@@ -12,36 +12,100 @@
 
     <title>SmartIntern — AI Matches</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- =====================================================
+         FONTS
+         ===================================================== -->
 
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
         rel="stylesheet"
     >
 
+
+    <!-- =====================================================
+         BASE CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/variables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
+
+    <!-- Existing dashboard CSS
+         keeps sidebar + topbar same -->
+
+    <link
+        rel="stylesheet"
+        href="../css/student-dashboard.css"
+    >
+
     <!-- AI Matches CSS -->
-    <link rel="stylesheet" href="../css/ai-matches.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/ai-match.css"
+    >
 
 </head>
 
 
-<body class="student-dashboard-page">
+<body class="student-dashboard-page ai-match-page">
 
 
-    <!-- SIDEBAR -->
+    <!-- =====================================================
+         MOBILE OVERLAY
+         ===================================================== -->
 
-    <aside class="dashboard-sidebar">
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+
+    <!-- =====================================================
+         SIDEBAR
+         SAME AS YOUR STUDENT DASHBOARD / SKILL GAP
+         ===================================================== -->
+
+    <aside
+        class="dashboard-sidebar"
+        id="dashboardSidebar"
+    >
+
+
+        <!-- Brand -->
 
         <div class="sidebar-brand">
 
-            <a href="student-dashboard.html">
+            <a href="index.html">
+
                 Smart<span>Intern</span>
+
             </a>
 
         </div>
 
+
+
+        <!-- Student Profile -->
 
         <div class="sidebar-profile">
 
@@ -51,21 +115,28 @@
 
             <div class="sidebar-profile-info">
 
-                <strong>Student</strong>
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
 
-                <span>Student Portal</span>
+                <span>
+                    Student
+                </span>
 
             </div>
 
         </div>
 
 
+
+        <!-- Navigation -->
+
         <nav class="sidebar-nav">
 
 
-            <div class="nav-label">
+            <p class="nav-label">
                 MAIN
-            </div>
+            </p>
 
 
             <a
@@ -75,38 +146,39 @@
 
                 <span class="nav-icon">⌂</span>
 
-                <span>Dashboard</span>
+                <span>
+                    Dashboard
+                </span>
 
             </a>
 
 
             <a
-                href="browse-internships.html"
+                href="student-browse-internships.html"
                 class="sidebar-link"
             >
 
                 <span class="nav-icon">⌕</span>
 
-                <span>Browse Internships</span>
+                <span>
+                    Browse Internships
+                </span>
 
             </a>
 
 
             <a
-                href="my-applications.html"
+                href="student-my-applications.html"
                 class="sidebar-link"
             >
 
                 <span class="nav-icon">▣</span>
 
-                <span>My Applications</span>
+                <span>
+                    My Applications
+                </span>
 
             </a>
-
-
-            <div class="nav-label nav-label-space">
-                AI TOOLS
-            </div>
 
 
             <a
@@ -114,11 +186,19 @@
                 class="sidebar-link"
             >
 
-                <span class="nav-icon">▤</span>
+                <span class="nav-icon">↥</span>
 
-                <span>Resume</span>
+                <span>
+                    Resume
+                </span>
 
             </a>
+
+
+
+            <p class="nav-label nav-label-space">
+                AI TOOLS
+            </p>
 
 
             <a
@@ -126,28 +206,33 @@
                 class="sidebar-link"
             >
 
-                <span class="nav-icon">◈</span>
+                <span class="nav-icon">✦</span>
 
-                <span>AI Skill Gap</span>
+                <span>
+                    AI Skill Gap
+                </span>
 
             </a>
 
 
             <a
-                href="ai-matches.html"
+                href="ai-match.html"
                 class="sidebar-link active"
             >
 
-                <span class="nav-icon">✦</span>
+                <span class="nav-icon">◎</span>
 
-                <span>AI Matches</span>
+                <span>
+                    AI Matches
+                </span>
 
             </a>
 
 
-            <div class="nav-label nav-label-space">
+
+            <p class="nav-label nav-label-space">
                 ACCOUNT
-            </div>
+            </p>
 
 
             <a
@@ -155,9 +240,26 @@
                 class="sidebar-link"
             >
 
-                <span class="nav-icon">◎</span>
+                <span class="nav-icon">◯</span>
 
-                <span>My Profile</span>
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <a
+                href="index.html"
+                class="sidebar-link"
+                id="logoutLink"
+            >
+
+                <span class="nav-icon">↪</span>
+
+                <span>
+                    Logout
+                </span>
 
             </a>
 
@@ -165,32 +267,21 @@
         </nav>
 
 
-        <div class="sidebar-bottom">
-
-            <a
-                href="#"
-                class="sidebar-link"
-                id="logoutLink"
-            >
-
-                <span class="nav-icon">↪</span>
-
-                <span>Logout</span>
-
-            </a>
-
-        </div>
-
     </aside>
 
 
 
-    <!-- MAIN -->
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
     <main class="dashboard-main">
 
 
-        <!-- TOPBAR -->
+        <!-- =================================================
+             TOPBAR
+             SAME AS SKILL GAP
+             ================================================= -->
 
         <header class="dashboard-topbar">
 
@@ -199,7 +290,6 @@
                 class="mobile-menu"
                 id="mobileMenu"
                 type="button"
-                aria-label="Open menu"
             >
                 ☰
             </button>
@@ -207,9 +297,13 @@
 
             <div class="topbar-title">
 
-                <span>SMART MATCHING</span>
+                <span>
+                    STUDENT PORTAL
+                </span>
 
-                <h1>AI Matches</h1>
+                <h1>
+                    AI Matches
+                </h1>
 
             </div>
 
@@ -219,12 +313,11 @@
 
                 <button
                     class="notification-button"
-                    type="button"
                     id="notificationButton"
-                    aria-label="Notifications"
+                    type="button"
                 >
 
-                    ♡
+                    ♧
 
                     <span class="notification-dot"></span>
 
@@ -233,15 +326,22 @@
 
                 <div class="topbar-profile">
 
-                    <div class="topbar-avatar">
+                    <div
+                        class="topbar-avatar"
+                        id="topbarAvatar"
+                    >
                         AS
                     </div>
 
                     <div class="topbar-profile-text">
 
-                        <strong>Student</strong>
+                        <strong id="topbarStudentName">
+                            Student
+                        </strong>
 
-                        <span>Computer Science</span>
+                        <span>
+                            Student
+                        </span>
 
                     </div>
 
@@ -249,496 +349,714 @@
 
 
             </div>
+
 
         </header>
 
 
 
-        <!-- PAGE CONTENT -->
+        <!-- =================================================
+             PAGE CONTENT
+             ================================================= -->
 
-        <section class="dashboard-content ai-matches-content">
+        <div class="ai-match-content">
 
 
-            <!-- INTRO -->
+            <!-- =================================================
+                 HERO
+                 ================================================= -->
 
-            <div class="matches-intro">
+            <section class="match-hero">
 
-                <div>
 
-                    <span class="section-eyebrow">
-                        AI POWERED RECOMMENDATIONS
+                <div class="match-hero-copy">
+
+                    <span class="match-eyebrow">
+                        SMARTINTERN AI
                     </span>
 
+
                     <h2>
-                        Internships matched<br>
-                        <em>for you.</em>
+
+                        Find your
+                        <em>perfect match.</em>
+
                     </h2>
 
+
                     <p>
-                        Our AI compares your skills, resume and career
-                        interests with internship requirements to find
-                        opportunities that fit your profile.
+
+                        Our AI compares your skills,
+                        profile and resume with internship
+                        requirements to find opportunities
+                        that fit you best.
+
                     </p>
 
                 </div>
 
 
-                <div class="match-score-card">
 
-                    <div class="score-ring">
+                <!-- AI VISUAL -->
 
-                        <div class="score-inner">
+                <div class="match-hero-visual">
 
-                            <strong id="overallScore">94%</strong>
 
-                            <span>Match</span>
+                    <div class="match-orbit orbit-one">
+                    </div>
 
-                        </div>
+
+                    <div class="match-orbit orbit-two">
+                    </div>
+
+
+                    <div class="match-orbit orbit-three">
+                    </div>
+
+
+                    <div class="match-crystal">
+
+                        <span>
+                            ✦
+                        </span>
 
                     </div>
 
-                    <div class="score-copy">
 
-                        <strong>Excellent profile match</strong>
+                    <div class="match-ai-badge">
 
-                        <span>Based on your current skills</span>
+                        <small>
+                            AI MATCHING
+                        </small>
+
+                        <strong>
+                            94%
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+                 ================================================= -->
+
+            <section class="match-summary">
+
+
+                <!-- Card 1 -->
+
+                <div class="match-summary-card">
+
+                    <div class="summary-icon purple">
+                        ✦
+                    </div>
+
+
+                    <div class="summary-info">
+
+                        <span>
+                            AI MATCHES
+                        </span>
+
+                        <strong>
+                            12
+                        </strong>
+
+                        <small>
+                            opportunities found
+                        </small>
 
                     </div>
 
                 </div>
 
-            </div>
 
 
+                <!-- Card 2 -->
 
-            <!-- FILTER -->
+                <div class="match-summary-card">
 
-            <div class="matches-toolbar">
+                    <div class="summary-icon pink">
+                        ◇
+                    </div>
 
-                <div>
 
-                    <span class="toolbar-label">
-                        YOUR AI MATCHES
-                    </span>
+                    <div class="summary-info">
 
-                    <strong>
-                        Recommended Internships
-                    </strong>
+                        <span>
+                            STRONG MATCHES
+                        </span>
+
+                        <strong>
+                            08
+                        </strong>
+
+                        <small>
+                            high compatibility
+                        </small>
+
+                    </div>
 
                 </div>
 
 
-                <select id="matchFilter">
 
-                    <option value="all">
-                        All Matches
-                    </option>
+                <!-- Card 3 -->
 
-                    <option value="high">
-                        90% & Above
-                    </option>
+                <div class="match-summary-card">
 
-                    <option value="medium">
-                        80% - 89%
-                    </option>
-
-                </select>
-
-            </div>
-
-
-
-            <!-- MATCH CARDS -->
-
-            <div class="matches-grid" id="matchesGrid">
-
-
-                <!-- CARD 1 -->
-
-                <article
-                    class="match-card"
-                    data-match="94"
-                >
-
-                    <div class="match-card-top">
-
-                        <div class="company-logo">
-                            TN
-                        </div>
-
-                        <span class="match-badge">
-                            94% Match
-                        </span>
-
+                    <div class="summary-icon plum">
+                        ◎
                     </div>
 
 
-                    <div class="match-card-heading">
+                    <div class="summary-info">
 
-                        <span class="company-name">
-                            TechNova
+                        <span>
+                            NEW MATCHES
                         </span>
 
-                        <h3>
-                            Frontend Development Intern
-                        </h3>
+                        <strong>
+                            06
+                        </strong>
 
-                        <p>
-                            Build modern web interfaces and work
-                            with a creative product development team.
-                        </p>
+                        <small>
+                            recently added
+                        </small>
 
                     </div>
 
-
-                    <div class="match-meta">
-
-                        <span>⌖ Remote</span>
-
-                        <span>◷ 3 Months</span>
-
-                        <span>◉ Technology</span>
-
-                    </div>
+                </div>
 
 
-                    <div class="skills-section">
+            </section>
 
-                        <span class="skills-label">
-                            MATCHED SKILLS
-                        </span>
 
-                        <div class="skill-tags">
 
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-                            <span>UI/UX</span>
+            <!-- =================================================
+                 MAIN TWO COLUMN AREA
+                 ================================================= -->
+
+            <section class="match-main-grid">
+
+
+                <!-- =================================================
+                     LEFT — TOP MATCHES
+                     ================================================= -->
+
+                <div class="top-matches-card">
+
+
+                    <div class="match-section-heading">
+
+                        <div>
+
+                            <span>
+                                YOUR BEST MATCHES
+                            </span>
+
+                            <h2>
+                                Internship
+                                <em>opportunities.</em>
+                            </h2>
 
                         </div>
 
-                    </div>
 
-
-                    <div class="card-footer">
-
-                        <span class="posted-text">
-                            Strong match for your profile
-                        </span>
-
-                        <a
-                            href="internship-detail.html"
-                            class="view-match"
-                        >
-                            View Internship →
+                        <a href="student-browse-internships.html">
+                            View all →
                         </a>
 
                     </div>
 
-                </article>
 
 
+                    <!-- Match 1 -->
 
-                <!-- CARD 2 -->
+                    <article class="match-opportunity">
 
-                <article
-                    class="match-card"
-                    data-match="91"
-                >
 
-                    <div class="match-card-top">
-
-                        <div class="company-logo logo-two">
-                            AL
+                        <div class="company-mark purple-mark">
+                            T
                         </div>
 
-                        <span class="match-badge">
-                            91% Match
-                        </span>
 
-                    </div>
+                        <div class="opportunity-info">
 
+                            <div class="opportunity-top">
 
-                    <div class="match-card-heading">
+                                <span class="opportunity-type">
+                                    REMOTE
+                                </span>
 
-                        <span class="company-name">
-                            Alpha Labs
-                        </span>
+                                <span class="opportunity-score">
+                                    94% Match
+                                </span>
 
-                        <h3>
-                            Web Development Intern
-                        </h3>
-
-                        <p>
-                            Join a collaborative engineering team
-                            working on responsive web applications.
-                        </p>
-
-                    </div>
+                            </div>
 
 
-                    <div class="match-meta">
-
-                        <span>⌖ Hybrid</span>
-
-                        <span>◷ 4 Months</span>
-
-                        <span>◉ Software</span>
-
-                    </div>
+                            <h3>
+                                Frontend Developer Intern
+                            </h3>
 
 
-                    <div class="skills-section">
+                            <p class="opportunity-company">
+                                TechNova Solutions
+                            </p>
 
-                        <span class="skills-label">
-                            MATCHED SKILLS
-                        </span>
 
-                        <div class="skill-tags">
+                            <div class="opportunity-meta">
 
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>Git</span>
+                                <span>
+                                    ◉ Remote
+                                </span>
+
+                                <span>
+                                    ◷ 3 Months
+                                </span>
+
+                                <span>
+                                    ⌁ Paid
+                                </span>
+
+                            </div>
+
+
+                            <div class="matched-skills">
+
+                                <span>
+                                    HTML
+                                </span>
+
+                                <span>
+                                    CSS
+                                </span>
+
+                                <span>
+                                    JavaScript
+                                </span>
+
+                                <span>
+                                    +2
+                                </span>
+
+                            </div>
 
                         </div>
 
-                    </div>
-
-
-                    <div class="card-footer">
-
-                        <span class="posted-text">
-                            Strong match for your profile
-                        </span>
 
                         <a
                             href="internship-detail.html"
-                            class="view-match"
+                            class="match-view-button"
                         >
-                            View Internship →
+                            View
+                            <span>→</span>
                         </a>
 
-                    </div>
 
-                </article>
-
+                    </article>
 
 
-                <!-- CARD 3 -->
 
-                <article
-                    class="match-card"
-                    data-match="87"
-                >
+                    <!-- Match 2 -->
 
-                    <div class="match-card-top">
+                    <article class="match-opportunity">
 
-                        <div class="company-logo logo-three">
-                            NC
+
+                        <div class="company-mark pink-mark">
+                            A
                         </div>
 
-                        <span class="match-badge">
-                            87% Match
-                        </span>
 
-                    </div>
+                        <div class="opportunity-info">
 
+                            <div class="opportunity-top">
 
-                    <div class="match-card-heading">
+                                <span class="opportunity-type">
+                                    HYBRID
+                                </span>
 
-                        <span class="company-name">
-                            Nova Creative Studio
-                        </span>
+                                <span class="opportunity-score">
+                                    91% Match
+                                </span>
 
-                        <h3>
-                            UI/UX Design Intern
-                        </h3>
-
-                        <p>
-                            Create user-focused digital experiences
-                            alongside designers and developers.
-                        </p>
-
-                    </div>
+                            </div>
 
 
-                    <div class="match-meta">
-
-                        <span>⌖ On-site</span>
-
-                        <span>◷ 3 Months</span>
-
-                        <span>◉ Design</span>
-
-                    </div>
+                            <h3>
+                                Software Engineering Intern
+                            </h3>
 
 
-                    <div class="skills-section">
+                            <p class="opportunity-company">
+                                Alpha Labs
+                            </p>
 
-                        <span class="skills-label">
-                            MATCHED SKILLS
-                        </span>
 
-                        <div class="skill-tags">
+                            <div class="opportunity-meta">
 
-                            <span>UI/UX</span>
-                            <span>Figma</span>
-                            <span>CSS</span>
+                                <span>
+                                    ◉ Islamabad
+                                </span>
+
+                                <span>
+                                    ◷ 6 Months
+                                </span>
+
+                                <span>
+                                    ⌁ Paid
+                                </span>
+
+                            </div>
+
+
+                            <div class="matched-skills">
+
+                                <span>
+                                    Python
+                                </span>
+
+                                <span>
+                                    Git
+                                </span>
+
+                                <span>
+                                    SQL
+                                </span>
+
+                                <span>
+                                    +3
+                                </span>
+
+                            </div>
 
                         </div>
 
-                    </div>
-
-
-                    <div class="card-footer">
-
-                        <span class="posted-text">
-                            Good match for your profile
-                        </span>
 
                         <a
                             href="internship-detail.html"
-                            class="view-match"
+                            class="match-view-button"
                         >
-                            View Internship →
+                            View
+                            <span>→</span>
                         </a>
 
-                    </div>
 
-                </article>
-
+                    </article>
 
 
-                <!-- CARD 4 -->
 
-                <article
-                    class="match-card"
-                    data-match="82"
-                >
+                    <!-- Match 3 -->
 
-                    <div class="match-card-top">
+                    <article class="match-opportunity">
 
-                        <div class="company-logo logo-four">
-                            DS
+
+                        <div class="company-mark plum-mark">
+                            N
                         </div>
 
-                        <span class="match-badge">
-                            82% Match
-                        </span>
 
-                    </div>
+                        <div class="opportunity-info">
 
+                            <div class="opportunity-top">
 
-                    <div class="match-card-heading">
+                                <span class="opportunity-type">
+                                    ONSITE
+                                </span>
 
-                        <span class="company-name">
-                            DataSphere
-                        </span>
+                                <span class="opportunity-score">
+                                    88% Match
+                                </span>
 
-                        <h3>
-                            Junior Data Intern
-                        </h3>
-
-                        <p>
-                            Work with datasets, reports and basic
-                            data analysis projects.
-                        </p>
-
-                    </div>
+                            </div>
 
 
-                    <div class="match-meta">
-
-                        <span>⌖ Remote</span>
-
-                        <span>◷ 3 Months</span>
-
-                        <span>◉ Data</span>
-
-                    </div>
+                            <h3>
+                                UI/UX Design Intern
+                            </h3>
 
 
-                    <div class="skills-section">
+                            <p class="opportunity-company">
+                                Nova Creative Studio
+                            </p>
 
-                        <span class="skills-label">
-                            MATCHED SKILLS
-                        </span>
 
-                        <div class="skill-tags">
+                            <div class="opportunity-meta">
 
-                            <span>Python</span>
-                            <span>SQL</span>
-                            <span>Git</span>
+                                <span>
+                                    ◉ Lahore
+                                </span>
+
+                                <span>
+                                    ◷ 3 Months
+                                </span>
+
+                                <span>
+                                    ⌁ Paid
+                                </span>
+
+                            </div>
+
+
+                            <div class="matched-skills">
+
+                                <span>
+                                    Figma
+                                </span>
+
+                                <span>
+                                    UI Design
+                                </span>
+
+                                <span>
+                                    Prototyping
+                                </span>
+
+                                <span>
+                                    +2
+                                </span>
+
+                            </div>
 
                         </div>
 
-                    </div>
-
-
-                    <div class="card-footer">
-
-                        <span class="posted-text">
-                            Potential match
-                        </span>
 
                         <a
                             href="internship-detail.html"
-                            class="view-match"
+                            class="match-view-button"
                         >
-                            View Internship →
+                            View
+                            <span>→</span>
                         </a>
+
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     RIGHT — WHY THESE MATCHES
+                     ================================================= -->
+
+                <div class="match-insight-card">
+
+
+                    <div class="insight-top">
+
+                        <div>
+
+                            <span>
+                                AI ANALYSIS
+                            </span>
+
+                            <h2>
+                                Why these
+                                <em>matches?</em>
+                            </h2>
+
+                        </div>
+
+
+                        <div class="insight-icon">
+                            ✦
+                        </div>
 
                     </div>
 
-                </article>
 
 
-            </div>
+                    <div class="match-percentage">
+
+                        <div class="percentage-circle">
+
+                            <div>
+
+                                <strong>
+                                    87%
+                                </strong>
+
+                                <span>
+                                    Profile Match
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
 
 
-            <!-- AI INSIGHT -->
+                    <p class="insight-text">
 
-            <div class="ai-insight-card">
+                        Your profile currently matches
+                        <strong>12 internship opportunities</strong>
+                        based on your skills, education and
+                        resume information.
 
-                <div class="insight-icon">
+                    </p>
+
+
+
+                    <div class="match-factors">
+
+
+                        <div class="factor">
+
+                            <span class="factor-icon">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Technical skills
+                                </strong>
+
+                                <small>
+                                    Strong alignment
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="factor">
+
+                            <span class="factor-icon">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Education
+                                </strong>
+
+                                <small>
+                                    Relevant background
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="factor">
+
+                            <span class="factor-icon">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Career interests
+                                </strong>
+
+                                <small>
+                                    Good compatibility
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <a
+                        href="skill-gap.html"
+                        class="analysis-link"
+                    >
+                        View AI Skill Analysis →
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MATCH EXPLANATION
+                 ================================================= -->
+
+            <section class="match-explanation">
+
+
+                <div class="explanation-icon">
                     ✦
                 </div>
 
-                <div class="insight-content">
+
+                <div class="explanation-copy">
 
                     <span>
-                        AI INSIGHT
+                        SMART MATCHING
                     </span>
 
-                    <h3>
-                        Improve your match score
-                    </h3>
+                    <h2>
+                        Better skills,
+                        <em>better matches.</em>
+                    </h2>
 
                     <p>
-                        Adding more relevant skills to your profile
-                        can help you match with more internships.
+
+                        SmartIntern compares your profile
+                        information with internship requirements
+                        to identify relevant opportunities and
+                        show you where your skills align.
+
                     </p>
 
                 </div>
 
+
                 <a
-                    href="skill-gap.html"
-                    class="insight-button"
+                    href="student-profile.html"
+                    class="improve-match-button"
                 >
-                    View Skill Gap
+                    Update Profile →
                 </a>
 
-            </div>
+
+            </section>
 
 
-        </section>
+        </div>
+
 
     </main>
 
 
 
-    <script src="../js/ai-matches.js"></script>
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    ></script>
+
+    <script src="../js/ai-match.js"></script>
+
 
 </body>
 

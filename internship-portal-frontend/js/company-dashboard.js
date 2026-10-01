@@ -1,120 +1,143 @@
 /* =========================================================
    SMARTINTERN COMPANY DASHBOARD
-   Three.js + GSAP + Dashboard Interactions
+   Same behaviour/animation as Student Dashboard
    ========================================================= */
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    loadCompanyData();
+        loadCompanyData();
 
-    initCompanyAnimations();
+        initDashboardAnimations();
 
-    initCompany3D();
+        initMobileSidebar();
 
-    initMobileSidebar();
+        initNotifications();
 
-    initNotifications();
+        initLogout();
 
-    initLogout();
+        initCardTilt();
 
-    initHeroParallax();
-
-});
+    }
+);
 
 
 
 /* =========================================================
-   COMPANY DATA
+   LOAD COMPANY DATA
    ========================================================= */
 
 function loadCompanyData() {
 
-    const storedProfile =
+    const savedProfile =
         sessionStorage.getItem(
             "smartInternCompanyProfile"
         );
 
 
-    if (!storedProfile) {
+    if (!savedProfile) {
+
         return;
+
     }
 
 
     try {
 
         const profile =
-            JSON.parse(storedProfile);
+            JSON.parse(savedProfile);
 
 
-        const companyName =
+        const name =
             profile.companyName ||
             profile.name ||
             "Company";
 
 
-        const elements = [
-
-            document.getElementById(
-                "sidebarCompanyName"
-            ),
-
-            document.getElementById(
-                "topbarCompanyName"
-            )
-
-        ];
-
-
-        elements.forEach((element) => {
-
-            if (element) {
-
-                element.textContent =
-                    companyName;
-
-            }
-
-        });
+        const firstName =
+            name.split(" ")[0];
 
 
         const initials =
-            getCompanyInitials(
-                companyName
+            getInitials(name);
+
+
+        const sidebarName =
+            document.getElementById(
+                "sidebarCompanyName"
             );
 
 
-        const avatarElements = [
+        const topbarName =
+            document.getElementById(
+                "topbarCompanyName"
+            );
 
+
+        const welcomeName =
+            document.getElementById(
+                "welcomeCompanyName"
+            );
+
+
+        const sidebarAvatar =
             document.getElementById(
                 "sidebarCompanyAvatar"
-            ),
+            );
 
+
+        const topbarAvatar =
             document.getElementById(
-                "topbarAvatar"
-            )
-
-        ];
+                "topbarCompanyAvatar"
+            );
 
 
-        avatarElements.forEach((avatar) => {
+        if (sidebarName) {
 
-            if (avatar) {
+            sidebarName.textContent =
+                name;
 
-                avatar.textContent =
-                    initials;
+        }
 
-            }
 
-        });
+        if (topbarName) {
 
+            topbarName.textContent =
+                name;
+
+        }
+
+
+        if (welcomeName) {
+
+            welcomeName.textContent =
+                firstName + ".";
+
+        }
+
+
+        if (sidebarAvatar) {
+
+            sidebarAvatar.textContent =
+                initials;
+
+        }
+
+
+        if (topbarAvatar) {
+
+            topbarAvatar.textContent =
+                initials;
+
+        }
 
     }
     catch (error) {
 
-        console.error(
-            "Could not load company profile.",
-            error
+        console.log(
+            "Could not load company profile."
         );
 
     }
@@ -124,443 +147,307 @@ function loadCompanyData() {
 
 
 /* =========================================================
-   COMPANY INITIALS
+   INITIALS
    ========================================================= */
 
-function getCompanyInitials(name) {
+function getInitials(name) {
 
-    const words =
-        name
-            .trim()
-            .split(/\s+/)
-            .filter(Boolean);
+    return name
 
+        .split(" ")
 
-    if (words.length === 1) {
+        .filter(Boolean)
 
-        return words[0]
-            .substring(0, 2)
-            .toUpperCase();
+        .slice(0, 2)
 
-    }
+        .map(
+            word =>
+                word
+                    .charAt(0)
+                    .toUpperCase()
+        )
 
-
-    return (
-        words[0][0] +
-        words[1][0]
-    ).toUpperCase();
+        .join("");
 
 }
 
 
 
 /* =========================================================
-   GSAP ANIMATIONS
+   GSAP DASHBOARD ANIMATIONS
+   SAME TIMING STYLE AS STUDENT
    ========================================================= */
 
-function initCompanyAnimations() {
+function initDashboardAnimations() {
 
     if (
         typeof gsap === "undefined"
     ) {
+
         return;
+
     }
 
+
+    /* TOPBAR */
 
     gsap.from(
         ".dashboard-topbar",
         {
+
             opacity: 0,
-            y: -18,
+
+            y: -15,
+
             duration: .6,
+
             ease: "power3.out"
+
         }
     );
 
+
+
+    /* WELCOME */
 
     gsap.from(
         ".dashboard-welcome",
         {
+
             opacity: 0,
+
             y: 25,
-            duration: .8,
+
+            scale: .98,
+
+            duration: .7,
+
             delay: .1,
+
             ease: "power3.out"
+
         }
     );
 
+
+
+    /* PROFILE */
 
     gsap.from(
         ".profile-progress-card",
         {
+
             opacity: 0,
-            y: 20,
-            duration: .6,
+
+            y: 18,
+
+            duration: .5,
+
             delay: .25,
+
             ease: "power3.out"
+
         }
     );
 
+
+
+    /* STATS */
 
     gsap.from(
         ".stat-card",
         {
+
             opacity: 0,
+
             y: 18,
-            duration: .5,
-            stagger: .08,
+
+            duration: .45,
+
+            stagger: .07,
+
             delay: .3,
+
             ease: "power3.out"
+
         }
     );
 
+
+
+    /* INTERNSHIPS */
 
     gsap.from(
-        ".dashboard-section, .ai-match-card, .upcoming-card",
+        ".internship-card",
         {
+
             opacity: 0,
-            y: 20,
-            duration: .55,
-            stagger: .08,
-            delay: .45,
+
+            x: -18,
+
+            duration: .5,
+
+            stagger: .1,
+
+            delay: .4,
+
             ease: "power3.out"
-        }
-    );
-
-
-}
-
-
-
-/* =========================================================
-   THREE.JS
-   ========================================================= */
-
-function initCompany3D() {
-
-    if (
-        typeof THREE === "undefined"
-    ) {
-        return;
-    }
-
-
-    const visual =
-        document.querySelector(
-            ".welcome-visual"
-        );
-
-
-    if (!visual) {
-        return;
-    }
-
-
-    /*
-     * Create canvas
-     */
-
-    const canvas =
-        document.createElement(
-            "canvas"
-        );
-
-
-    canvas.className =
-        "company-dashboard-canvas";
-
-
-    visual.insertBefore(
-        canvas,
-        visual.firstChild
-    );
-
-
-    const scene =
-        new THREE.Scene();
-
-
-    const camera =
-        new THREE.PerspectiveCamera(
-            45,
-            1,
-            .1,
-            100
-        );
-
-
-    camera.position.z = 5;
-
-
-    const renderer =
-        new THREE.WebGLRenderer({
-
-            canvas: canvas,
-
-            alpha: true,
-
-            antialias: true
-
-        });
-
-
-    renderer.setPixelRatio(
-        Math.min(
-            window.devicePixelRatio,
-            2
-        )
-    );
-
-
-    function resize() {
-
-        const width =
-            visual.clientWidth;
-
-        const height =
-            visual.clientHeight;
-
-
-        renderer.setSize(
-            width,
-            height,
-            false
-        );
-
-
-        camera.aspect =
-            width / height;
-
-
-        camera.updateProjectionMatrix();
-
-    }
-
-
-    resize();
-
-
-    window.addEventListener(
-        "resize",
-        resize
-    );
-
-
-
-    /* ================= CRYSTAL ================= */
-
-    const geometry =
-        new THREE.IcosahedronGeometry(
-            1.25,
-            1
-        );
-
-
-    const material =
-        new THREE.MeshBasicMaterial({
-
-            color: 0xb38bd7,
-
-            wireframe: true,
-
-            transparent: true,
-
-            opacity: .23
-
-        });
-
-
-    const crystal =
-        new THREE.Mesh(
-            geometry,
-            material
-        );
-
-
-    scene.add(crystal);
-
-
-
-    /* ================= INNER CRYSTAL ================= */
-
-    const innerGeometry =
-        new THREE.IcosahedronGeometry(
-            .78,
-            1
-        );
-
-
-    const innerMaterial =
-        new THREE.MeshBasicMaterial({
-
-            color: 0xe8a8c7,
-
-            wireframe: true,
-
-            transparent: true,
-
-            opacity: .16
-
-        });
-
-
-    const innerCrystal =
-        new THREE.Mesh(
-            innerGeometry,
-            innerMaterial
-        );
-
-
-    scene.add(innerCrystal);
-
-
-
-    /* ================= PARTICLES ================= */
-
-    const particleGeometry =
-        new THREE.BufferGeometry();
-
-
-    const particleCount = 70;
-
-
-    const positions =
-        new Float32Array(
-            particleCount * 3
-        );
-
-
-    for (
-        let i = 0;
-        i < particleCount * 3;
-        i++
-    ) {
-
-        positions[i] =
-            (Math.random() - .5) * 6;
-
-    }
-
-
-    particleGeometry.setAttribute(
-        "position",
-        new THREE.BufferAttribute(
-            positions,
-            3
-        )
-    );
-
-
-    const particleMaterial =
-        new THREE.PointsMaterial({
-
-            color: 0xb38bd7,
-
-            size: .035,
-
-            transparent: true,
-
-            opacity: .45
-
-        });
-
-
-    const particles =
-        new THREE.Points(
-            particleGeometry,
-            particleMaterial
-        );
-
-
-    scene.add(particles);
-
-
-
-    /* ================= MOUSE ================= */
-
-    let mouseX = 0;
-    let mouseY = 0;
-
-
-    window.addEventListener(
-        "pointermove",
-        (event) => {
-
-            mouseX =
-                (event.clientX /
-                    window.innerWidth -
-                    .5) * .35;
-
-
-            mouseY =
-                (event.clientY /
-                    window.innerHeight -
-                    .5) * .25;
 
         }
     );
 
 
 
-    /* ================= ANIMATION ================= */
+    /* RIGHT COLUMN */
 
-    function animate() {
+    gsap.from(
+        ".ai-match-card, .upcoming-card",
+        {
 
-        requestAnimationFrame(
-            animate
-        );
+            opacity: 0,
 
+            x: 18,
 
-        crystal.rotation.x += .002;
-        crystal.rotation.y += .003;
+            duration: .55,
 
+            stagger: .1,
 
-        innerCrystal.rotation.x -= .0015;
-        innerCrystal.rotation.y -= .002;
+            delay: .45,
 
+            ease: "power3.out"
 
-        particles.rotation.y += .0005;
-
-
-        crystal.rotation.x +=
-            mouseY * .002;
+        }
+    );
 
 
-        crystal.rotation.y +=
-            mouseX * .002;
+
+    /* BOTTOM */
+
+    gsap.from(
+        ".applications-card, .notifications-card",
+        {
+
+            opacity: 0,
+
+            y: 20,
+
+            duration: .5,
+
+            stagger: .1,
+
+            delay: .55,
+
+            ease: "power3.out"
+
+        }
+    );
 
 
-        renderer.render(
-            scene,
-            camera
-        );
 
-    }
+    /* PROFILE CARD */
+
+    gsap.from(
+        ".resume-dashboard-card",
+        {
+
+            opacity: 0,
+
+            y: 20,
+
+            duration: .5,
+
+            delay: .65,
+
+            ease: "power3.out"
+
+        }
+    );
 
 
-    animate();
+
+    /* =====================================================
+       FLOATING AI MATCH CARD
+       ===================================================== */
+
+    gsap.to(
+        ".floating-match-card",
+        {
+
+            y: -8,
+
+            duration: 2.3,
+
+            repeat: -1,
+
+            yoyo: true,
+
+            ease: "sine.inOut"
+
+        }
+    );
 
 
-    /* ================= GSAP FLOAT ================= */
 
-    if (
-        typeof gsap !== "undefined"
-    ) {
+    /* =====================================================
+       CRYSTAL
+       ===================================================== */
 
-        gsap.to(
-            crystal.scale,
-            {
-                x: 1.08,
-                y: 1.08,
-                z: 1.08,
-                duration: 2.5,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut"
-            }
-        );
+    gsap.to(
+        ".visual-crystal",
+        {
 
-    }
+            rotation: "+=360",
+
+            duration: 18,
+
+            repeat: -1,
+
+            ease: "none"
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ORBIT 1
+       ===================================================== */
+
+    gsap.to(
+        ".orbit-one",
+        {
+
+            rotation: "+=360",
+
+            duration: 15,
+
+            repeat: -1,
+
+            ease: "none"
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ORBIT 2
+       ===================================================== */
+
+    gsap.to(
+        ".orbit-two",
+        {
+
+            rotation: "-=360",
+
+            duration: 20,
+
+            repeat: -1,
+
+            ease: "none"
+
+        }
+    );
 
 }
 
@@ -595,30 +482,20 @@ function initMobileSidebar() {
         !sidebar ||
         !overlay
     ) {
+
         return;
-    }
-
-
-    function openSidebar() {
-
-        sidebar.classList.add(
-            "open"
-        );
-
-        overlay.classList.add(
-            "show"
-        );
 
     }
 
 
-    function closeSidebar() {
+    function toggleSidebar() {
 
-        sidebar.classList.remove(
+        sidebar.classList.toggle(
             "open"
         );
 
-        overlay.classList.remove(
+
+        overlay.classList.toggle(
             "show"
         );
 
@@ -627,13 +504,13 @@ function initMobileSidebar() {
 
     menu.addEventListener(
         "click",
-        openSidebar
+        toggleSidebar
     );
 
 
     overlay.addEventListener(
         "click",
-        closeSidebar
+        toggleSidebar
     );
 
 
@@ -641,14 +518,27 @@ function initMobileSidebar() {
         .querySelectorAll(
             ".sidebar-link"
         )
-        .forEach((link) => {
+        .forEach(
+            link => {
 
-            link.addEventListener(
-                "click",
-                closeSidebar
-            );
+                link.addEventListener(
+                    "click",
+                    () => {
 
-        });
+                        sidebar.classList.remove(
+                            "open"
+                        );
+
+
+                        overlay.classList.remove(
+                            "show"
+                        );
+
+                    }
+                );
+
+            }
+        );
 
 }
 
@@ -672,7 +562,7 @@ function initNotifications() {
         );
 
 
-    const closeButton =
+    const close =
         document.getElementById(
             "closeNotifications"
         );
@@ -682,13 +572,18 @@ function initNotifications() {
         !button ||
         !panel
     ) {
+
         return;
+
     }
 
 
     button.addEventListener(
         "click",
-        () => {
+        event => {
+
+            event.stopPropagation();
+
 
             panel.classList.toggle(
                 "show"
@@ -698,9 +593,9 @@ function initNotifications() {
     );
 
 
-    if (closeButton) {
+    if (close) {
 
-        closeButton.addEventListener(
+        close.addEventListener(
             "click",
             () => {
 
@@ -716,11 +611,20 @@ function initNotifications() {
 
     document.addEventListener(
         "click",
-        (event) => {
+        event => {
 
             if (
-                !panel.contains(event.target) &&
-                !button.contains(event.target)
+
+                !panel.contains(
+                    event.target
+                )
+
+                &&
+
+                !button.contains(
+                    event.target
+                )
+
             ) {
 
                 panel.classList.remove(
@@ -742,26 +646,33 @@ function initNotifications() {
 
 function initLogout() {
 
-    const logout =
+    const logoutLink =
         document.getElementById(
             "logoutLink"
         );
 
 
-    if (!logout) {
+    if (!logoutLink) {
+
         return;
+
     }
 
 
-    logout.addEventListener(
+    logoutLink.addEventListener(
         "click",
-        (event) => {
+        event => {
 
             event.preventDefault();
 
 
+            /*
+             * Database account delete nahi hota.
+             * Sirf current session clear hoti hai.
+             */
+
             sessionStorage.removeItem(
-                "smartInternCompanyProfile"
+                "smartInternToken"
             );
 
 
@@ -786,93 +697,86 @@ function initLogout() {
 
 
 /* =========================================================
-   HERO PARALLAX
+   CARD 3D TILT
+   SAME AS STUDENT DASHBOARD
    ========================================================= */
 
-function initHeroParallax() {
+function initCardTilt() {
 
-    const hero =
-        document.querySelector(
-            ".dashboard-welcome"
+    const cards =
+        document.querySelectorAll(
+            ".stat-card, " +
+            ".internship-card, " +
+            ".ai-match-card, " +
+            ".upcoming-card"
         );
 
 
-    const visual =
-        document.querySelector(
-            ".welcome-visual"
-        );
+    cards.forEach(
+        card => {
 
 
-    if (
-        !hero ||
-        !visual
-    ) {
-        return;
-    }
+            card.addEventListener(
+                "mousemove",
+                event => {
 
 
-    hero.addEventListener(
-        "mousemove",
-        (event) => {
-
-            const rect =
-                hero.getBoundingClientRect();
+                    const rect =
+                        card.getBoundingClientRect();
 
 
-            const x =
-                (event.clientX -
-                    rect.left) /
-                rect.width -
-                .5;
+                    const x =
+                        event.clientX -
+                        rect.left;
 
 
-            const y =
-                (event.clientY -
-                    rect.top) /
-                rect.height -
-                .5;
+                    const y =
+                        event.clientY -
+                        rect.top;
 
 
-            if (
-                typeof gsap !== "undefined"
-            ) {
-
-                gsap.to(
-                    visual,
-                    {
-                        x: x * 10,
-                        y: y * 7,
-                        duration: .5,
-                        ease: "power2.out",
-                        overwrite: true
-                    }
-                );
-
-            }
-
-        }
-    );
+                    const centerX =
+                        rect.width / 2;
 
 
-    hero.addEventListener(
-        "mouseleave",
-        () => {
+                    const centerY =
+                        rect.height / 2;
 
-            if (
-                typeof gsap !== "undefined"
-            ) {
 
-                gsap.to(
-                    visual,
-                    {
-                        x: 0,
-                        y: 0,
-                        duration: .7,
-                        ease: "power3.out"
-                    }
-                );
+                    const rotateX =
+                        ((y - centerY) /
+                            centerY) * -3;
 
-            }
+
+                    const rotateY =
+                        ((x - centerX) /
+                            centerX) * 3;
+
+
+                    card.style.transform =
+                        `perspective(900px)
+                         rotateX(${rotateX}deg)
+                         rotateY(${rotateY}deg)
+                         translateY(-4px)`;
+
+                }
+            );
+
+
+
+            card.addEventListener(
+                "mouseleave",
+                () => {
+
+                    card.style.transform =
+                        "perspective(900px) " +
+                        "rotateX(0deg) " +
+                        "rotateY(0deg) " +
+                        "translateY(0)";
+
+                }
+            );
+
 
         }
     );
