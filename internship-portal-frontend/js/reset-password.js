@@ -17,6 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
+       GET RESET TOKEN FROM URL
+    ======================================================= */
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const resetToken = urlParams.get("token");
+
+
+    /* ======================================================
        SHOW / HIDE PASSWORD
     ======================================================= */
 
@@ -61,13 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         const password =
-            newPassword.value;
+            newPassword.value.trim();
 
         const confirm =
-            confirmPassword.value;
+            confirmPassword.value.trim();
 
 
-        /* New password required */
+        /* ==================================================
+           TOKEN CHECK
+        ================================================== */
+
+        if (!resetToken) {
+
+            newPasswordError.textContent =
+                "This password reset link is invalid or expired.";
+
+            return;
+        }
+
+
+        /* ==================================================
+           NEW PASSWORD REQUIRED
+        ================================================== */
 
         if (!password) {
 
@@ -75,11 +99,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 "New password is required.";
 
             return;
-
         }
 
 
-        /* Confirm password required */
+        /* ==================================================
+           CONFIRM PASSWORD REQUIRED
+        ================================================== */
 
         if (!confirm) {
 
@@ -87,11 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Please confirm your new password.";
 
             return;
-
         }
 
 
-        /* Password match */
+        /* ==================================================
+           PASSWORD MATCH
+        ================================================== */
 
         if (password !== confirm) {
 
@@ -99,20 +125,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Passwords do not match.";
 
             return;
-
         }
 
 
-        /*
-         * BACKEND RESET PASSWORD API
-         * will be connected here.
-         */
+        /* ==================================================
+           BACKEND RESET PASSWORD API
+           
+           Backend endpoint will be connected here
+           after we confirm the actual backend route.
+        ================================================== */
 
+        console.log("Reset token:", resetToken);
         console.log("Password reset requested");
 
 
         /*
-         * After successful backend response:
+         * AFTER BACKEND SUCCESS:
          *
          * window.location.href = "login.html";
          */

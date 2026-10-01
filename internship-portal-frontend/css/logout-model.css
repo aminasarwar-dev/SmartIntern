@@ -1,0 +1,175 @@
+/* =========================================================
+   LOGOUT CONFIRMATION MODAL
+   SmartIntern — Student Portal
+   ========================================================= */
+
+.logout-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(41, 35, 43, 0.28);
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+.logout-modal.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* Modal Box */
+
+.logout-modal-box {
+    width: min(100%, 390px);
+
+    padding: 34px 32px 30px;
+
+    background: #ffffff;
+    border: 1px solid #eee5ed;
+    border-radius: 22px;
+
+    box-shadow:
+        0 24px 70px rgba(41, 35, 43, 0.16),
+        0 8px 25px rgba(41, 35, 43, 0.07);
+
+    text-align: center;
+
+    transform: translateY(12px) scale(0.97);
+    transition: transform 0.25s ease;
+}
+
+.logout-modal.show .logout-modal-box {
+    transform: translateY(0) scale(1);
+}
+
+
+/* Heading */
+
+.logout-modal-box h2 {
+    margin: 0 0 9px;
+
+    color: #29232b;
+
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.logout-modal-box h2 em {
+    color: #8d63ad;
+    font-style: italic;
+}
+
+
+/* Text */
+
+.logout-modal-box p {
+    margin: 0 auto 26px;
+
+    color: #756a78;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+
+/* Buttons */
+
+.logout-modal-actions {
+    display: flex;
+    gap: 11px;
+    justify-content: center;
+}
+
+.logout-modal-btn {
+    height: 44px;
+    min-width: 120px;
+
+    padding: 0 22px;
+
+    border-radius: 12px;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* Cancel */
+
+.logout-cancel-btn {
+    color: #29232b;
+    background: #f8f3f8;
+    border: 1px solid #eee5ed;
+}
+
+.logout-cancel-btn:hover {
+    background: #f1eaf2;
+    transform: translateY(-1px);
+}
+
+
+/* Logout */
+
+.logout-confirm-btn {
+    color: #ffffff;
+    background: #8d63ad;
+    border: 1px solid #8d63ad;
+    box-shadow: 0 8px 18px rgba(141, 99, 173, 0.18);
+}
+
+.logout-confirm-btn:hover {
+    background: #7d559d;
+    border-color: #7d559d;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(141, 99, 173, 0.25);
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .logout-modal-box {
+        padding: 30px 22px 25px;
+        border-radius: 19px;
+    }
+
+    .logout-modal-box h2 {
+        font-size: 24px;
+    }
+
+    .logout-modal-actions {
+        flex-direction: column;
+    }
+
+    .logout-modal-btn {
+        width: 100%;
+    }
+}
