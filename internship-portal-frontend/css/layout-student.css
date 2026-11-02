@@ -1,0 +1,119 @@
+@import url("dashboard-shared.css");
+
+/* SmartIntern — shared student sidebar (extracted from the 5 student CSS files).
+   Load BEFORE the page css. */
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+
+/* =========================================================
+   SIDEBAR PROFILE
+   ========================================================= */
+
+
+.sidebar-profile-info strong {
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* =========================================================
+   NAV
+   ========================================================= */
+
+
+.sidebar-link {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    height: 42px;
+
+    padding:
+        0 12px;
+
+    margin-bottom: 3px;
+
+    border-radius: 11px;
+
+    color: #817582;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+
+}
+
+.sidebar-link:hover {
+
+    color: var(--plum);
+
+    background: #faf5fa;
+
+    transform:
+        translateX(2px);
+
+}
+
+.sidebar-link.active {
+
+    color: var(--plum);
+
+    background:
+        linear-gradient(
+            90deg,
+            #f7edf7,
+            #fbf5f9
+        );
+
+}
+
+.sidebar-link.active::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 3px;
+
+    height: 20px;
+
+    border-radius: 0 4px 4px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--purple),
+            var(--pink)
+        );
+
+}
+
+.sidebar-link.active .nav-icon {
+
+    color: var(--purple-dark);
+
+}

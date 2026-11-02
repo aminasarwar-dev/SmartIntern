@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Internship Details | SmartIntern</title>
+
+
+    <!-- Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- GSAP -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    ></script>
+
+
+    <!-- ONLY THIS CSS -->
+
+    <link rel="stylesheet" href="../css/layout-student.css">
+    <link
+        rel="stylesheet"
+        href="../css/skill-gap.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../css/base.css"
+    >
+    <link
+        rel="stylesheet"
+        href="../css/variables.css"
+    >
+    <link rel="stylesheet" href="../css/dashboard-tokens.css">
+    <link rel="stylesheet" href="../css/logout-model.css">
+
+    <link rel="stylesheet" href="../css/ai-ui.css">
+    <link rel="stylesheet" href="../css/apply-flow.css">
+    <script src="../js/api.js"></script>
+    <script src="../js/ai-ui.js"></script>
+    <script src="../js/student-data.js"></script>
+    <script src="../js/session.js" data-role="student"></script>
+</head>
+
+
+<body class="student-dashboard-page">
+
+
+    <!-- =====================================================
+         MOBILE OVERLAY
+         ===================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="dashboard-sidebar" id="dashboardSidebar" data-role="student"></aside>
+
+    <!-- Sidebar menu lives in js/sidebar.js (one place for all pages) -->
+    <script src="../js/sidebar.js"></script>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- =================================================
+             TOPBAR
+             ================================================= -->
+
+        <header class="dashboard-topbar">
+
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                type="button"
+            >
+                ☰
+            </button>
+
+
+            <div class="topbar-title">
+
+                <span>
+                    STUDENT PORTAL
+                </span>
+
+                <h1>Internship Details</h1>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <button
+                    class="notification-button"
+                    id="notificationButton"
+                    type="button"
+                >
+
+                    ♧
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="topbar-profile">
+
+                    <div
+                        class="topbar-avatar"
+                        id="topbarAvatar"
+                    >
+                        AS
+                    </div>
+
+                    <div class="topbar-profile-text">
+
+                        <strong id="topbarStudentName">
+                            Student
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </header>
+
+        <!-- =================================================
+             INTERNSHIP DETAILS
+             Filled by js/internship-detail.js from
+             GET /student/internships/{id}  (address: /internship-detail?id=12)
+             ================================================= -->
+
+        <div class="detail-content">
+
+            <a href="/student-browse-internships" class="detail-back">
+                &larr; Back to internships
+            </a>
+
+            <section class="detail-card">
+                <span class="detail-eyebrow">INTERNSHIP DETAILS</span>
+
+                <h2 id="detailTitle">Loading…</h2>
+
+                <p class="detail-company" id="detailCompany"></p>
+
+                <div class="detail-tags" id="detailTags"></div>
+
+                <!-- shown only when the internship could not be loaded -->
+                <p class="detail-state" id="detailState" hidden></p>
+
+                <div id="detailBody">
+
+                    <h3>About the role</h3>
+                    <p id="detailDescription"></p>
+
+                    <div id="detailResponsibilitiesBox" hidden>
+                        <h3>What you will do</h3>
+                        <ul class="detail-bullets" id="detailResponsibilities"></ul>
+                    </div>
+
+                    <div id="detailRequirementsBox" hidden>
+                        <h3>Requirements</h3>
+                        <ul class="detail-bullets" id="detailRequirements"></ul>
+                    </div>
+
+                    <h3>Details</h3>
+                    <ul class="detail-list" id="detailFacts">
+                        <li data-fact="work"><strong>Work type:</strong> <span id="detailWork"></span></li>
+                        <li data-fact="duration"><strong>Duration:</strong> <span id="detailDuration"></span></li>
+                        <li data-fact="schedule"><strong>Schedule:</strong> <span id="detailSchedule"></span></li>
+                        <li data-fact="hours"><strong>Hours per week:</strong> <span id="detailHours"></span></li>
+                        <li data-fact="start"><strong>Start date:</strong> <span id="detailStart"></span></li>
+                        <li data-fact="positions"><strong>Open positions:</strong> <span id="detailPositions"></span></li>
+                        <li data-fact="education"><strong>Education:</strong> <span id="detailEducation"></span></li>
+                        <li data-fact="stipend"><strong>Stipend:</strong> <span id="detailStipend"></span></li>
+                        <li data-fact="deadline"><strong>Apply before:</strong> <span id="detailDeadline"></span></li>
+                    </ul>
+
+                    <div id="detailCompanyBox" hidden>
+                        <h3>About the company</h3>
+                        <p id="detailCompanyAbout"></p>
+                        <ul class="detail-list" id="detailCompanyFacts">
+                            <li data-fact="industry"><strong>Industry:</strong> <span id="detailIndustry"></span></li>
+                            <li data-fact="location"><strong>Location:</strong> <span id="detailCompanyLocation"></span></li>
+                            <li data-fact="website"><strong>Website:</strong> <span id="detailWebsite"></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-actions">
+                        <a href="/student-my-applications" class="detail-apply" id="detailApply">Apply now</a>
+                        <a href="/student-browse-internships" class="detail-secondary">Browse more</a>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <style>
+        .detail-content { padding: 24px 32px 48px; max-width: 880px; }
+        .detail-back { display: inline-block; margin-bottom: 18px; color: var(--purple-deep); font-weight: 600; }
+        .detail-card { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 32px; box-shadow: 0 20px 40px rgba(70, 40, 70, .06); }
+        .detail-eyebrow { font-size: 12px; letter-spacing: .12em; color: var(--purple-deep); font-weight: 700; }
+        .detail-card h2 { font-size: 32px; margin: 8px 0 6px; }
+        .detail-card h3 { margin: 24px 0 8px; font-size: 18px; }
+        .detail-company { color: var(--muted); margin-bottom: 16px; }
+        .detail-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .detail-tags span { background: var(--purple-soft); color: var(--purple-deep); padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+        .detail-list { list-style: none; display: grid; gap: 6px; }
+        .detail-bullets { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+        .detail-state { margin: 18px 0 0; padding: 14px 16px; border-radius: 14px; background: var(--purple-soft); color: var(--purple-deep); font-weight: 600; }
+        .detail-apply[aria-disabled="true"] { opacity: .6; pointer-events: none; }
+        #detailDescription { white-space: pre-line; }
+        .detail-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+        .detail-apply, .detail-secondary { padding: 12px 24px; border-radius: 999px; font-weight: 700; }
+        .detail-apply { background: var(--dark); color: #fff; }
+        .detail-secondary { border: 1px solid var(--border); }
+        @media (max-width: 640px) { .detail-content { padding: 16px; } .detail-card { padding: 20px; } }
+    </style>
+
+
+    <script>
+        (function () {
+            const menu = document.getElementById("mobileMenu");
+            const sidebar = document.getElementById("dashboardSidebar");
+            const overlay = document.getElementById("sidebarOverlay");
+            if (menu && sidebar && overlay) {
+                menu.addEventListener("click", () => {
+                    sidebar.classList.add("open");
+                    overlay.classList.add("show");
+                });
+                overlay.addEventListener("click", () => {
+                    sidebar.classList.remove("open");
+                    overlay.classList.remove("show");
+                });
+            }
+        })();
+    </script>
+
+    <script src="../js/apply-flow.js"></script>
+    <script src="../js/student-internship-utils.js"></script>
+    <script src="../js/internship-detail.js"></script>
+    <script src="../js/logout.js"></script>
+
+    <script src="../js/notifications.js"></script>
+    <script src="../js/student-photo.js"></script>
+</body>
+</html>
